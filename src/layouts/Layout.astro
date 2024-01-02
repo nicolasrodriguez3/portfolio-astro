@@ -8,7 +8,7 @@ const { title } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -22,19 +22,8 @@ const { title } = Astro.props
 
 		<title>{title}</title>
 	</head>
-	<body class="dark">
-		<!-- <div id="fondo">
-			<svg
-				id="svg"
-				xmlns="http://www.w3.org/2000/svg"
-				view-box="0 0 100vw 100vh"
-				width="100vw"
-				height="100vh"
-			>
-				<rect id="bg-svg" width="100vw" height="100vh" fill="#000"></rect>
-			</svg>
-		</div> -->
-		<div class="fixed top-0 z-[-2] h-screen w-screen bg-white dark:bg-gray-950 bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_60%,rgba(0,163,255,0)_100%)]">
+	<body class="">
+		<div class="fixed top-0 -z-10 h-screen w-screen bg-white dark:bg-gray-950 bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_60%,rgba(0,163,255,0)_100%)]">
 		</div>
 		<Header />
 		<slot />
@@ -59,77 +48,11 @@ const { title } = Astro.props
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
+		background: #ddd;
 		color-scheme: light dark;
 	}
-	/* #fondo {
-		width: 100vw;
-		height: 100vh;
-		position: fixed;
-		top: 0;
-		right: 0;
-		z-index: -10;
+	body{
+		width: 100%;
 	}
 
-	@keyframes parpadeo {
-		0% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0.5;
-		}
-	} */
 </style>
-
-<!-- <script>
-	function generarFondoEstrellado() {
-		const vHeight = window.outerHeight
-		const vWidth = window.outerWidth
-
-		const svg = document.getElementById("svg")
-
-		// Grupo de estrellas
-		const grupoEstrellas = document.createElementNS("http://www.w3.org/2000/svg", "g")
-		grupoEstrellas.setAttribute("fill", "#fff")
-
-		// Estrellas
-		for (let i = 0; i < 50; i++) {
-			const random = Math.random()
-			const random2 = Math.random()
-			const estrella = document.createElementNS("http://www.w3.org/2000/svg", "circle")
-			estrella.setAttribute("class", "estrella")
-			estrella.setAttribute("cx", (random * vWidth).toString())
-			estrella.setAttribute("cy", (random2 * vHeight).toString())
-			estrella.setAttribute("r", (random + 1).toString())
-
-			// Asignar animación individual a cada estrella
-			estrella.style.animation = `parpadeo ${random + 1}s infinite ${
-				i / 10
-			}s alternate, moverEstrella${i} 60s infinite alternate`
-
-			grupoEstrellas.appendChild(estrella)
-
-			// Definir animación individual para cada estrella
-			const estilo = document.styleSheets[0]
-			estilo.insertRule(
-				`
-				@keyframes moverEstrella${i} {
-					0% {
-						transform: translate(0, 0);
-					}
-					100% {
-						transform: translate(${random * 30}px, ${random2 * 30}px);
-					}
-				}
-			`,
-				estilo.cssRules.length
-			)
-		}
-
-		svg.appendChild(grupoEstrellas)
-
-		document.getElementById("fondo").appendChild(svg)
-	}
-
-	generarFondoEstrellado()
-</script> -->
