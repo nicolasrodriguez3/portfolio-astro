@@ -12,10 +12,13 @@ import Pill from "../components/Pill.astro";
 				<img class="rounded-full bg-blue-300 size-20 object-cover" src="/img-perfil.png" alt="Foto de mi persona" />
 			</picture>
 			<div class="flex flex-col justify-center">
-				<p class="text-2xl">¡Hola! 👋🏻</p>
-				<h1 class="text-4xl font-semibold">Soy Nicolás Rodríguez</h1>
-				<h3 class="text-xl text-sky-900 dark:text-sky-100">Frontend Developer</h3>
+				<p class="text-2xl md:text-4xl">¡Hola! 👋🏻</p>
+				<h1 class="text-4xl md:text-5xl font-semibold">Soy Nicolás Rodríguez</h1>
+				<h3 class="text-xl md:text-3xl text-sky-900 dark:text-sky-100">Frontend Developer</h3>
 			</div>
+		</Section>
+		<Section title="Sobre mí">
+			<p>Creativo, innovador, resolutivo</p>
 		</Section>
 		<Services />
 		<section id="tecnologias" class="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
@@ -34,11 +37,29 @@ import Pill from "../components/Pill.astro";
       </div>
     </section>
 		<Section title="Proyectos">
-			<p>Proyecto 1
-			</p>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+					<img
+						src="/somos-crespo.png"
+						alt="Project 1"
+						class="w-full"
+						width="300"
+						height="200"
+						style="aspect-ratio: 300 / 200; object-fit: cover;"
+					/>
+					<div class="flex flex-col space-y-1.5 p-6">
+						<h3 class="text-xl font-bold">Somos Crespo</h3>
+					</div>
+					<div class="p-6">
+						<p class="text-white/80">
+							Una aplicación Web Progresiva (PWA) diseñada y desarrollada para un concurso de la Municipalidad de Crespo, en el cual quede en tercer lugar.
+						</p>
+						<button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4">
+							View Project
+						</button>
+					</div>
+				</div>
 		</Section>
-		<Section title="Sobre mí">
-			<p>Creativo, innovador, resolutivo</p>
-		</Section>
+		
 	</main>
 </Layout>
