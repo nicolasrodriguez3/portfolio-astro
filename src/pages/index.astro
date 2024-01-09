@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro"
 import Section from "../components/Section.astro";
 import Services from "../components/Services.astro";
 import Pill from "../components/Pill.astro";
+import Projects from "../components/Projects.astro";
 ---
 
 <Layout title="NicoDev | Desarrollador Web">
@@ -36,30 +37,8 @@ import Pill from "../components/Pill.astro";
         </div>
       </div>
     </section>
-		<Section title="Proyectos">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				<div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-					<img
-						src="/somos-crespo.png"
-						alt="Project 1"
-						class="w-full"
-						width="300"
-						height="200"
-						style="aspect-ratio: 300 / 200; object-fit: cover;"
-					/>
-					<div class="flex flex-col space-y-1.5 p-6">
-						<h3 class="text-xl font-bold">Somos Crespo</h3>
-					</div>
-					<div class="p-6">
-						<p class="text-white/80">
-							Una aplicación Web Progresiva (PWA) diseñada y desarrollada para un concurso de la Municipalidad de Crespo, en el cual quede en tercer lugar.
-						</p>
-						<button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4">
-							View Project
-						</button>
-					</div>
-				</div>
-		</Section>
+		
+		<Projects />
 		
 	</main>
 </Layout>
