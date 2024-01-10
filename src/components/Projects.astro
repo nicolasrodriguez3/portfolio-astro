@@ -13,7 +13,12 @@ const PROJECTS = [
 		linkToCode: "https://github.com/nicolasrodriguez3/crespo-app",
 		video: null,
 		deployedSite: null,
-		images: ["/somos-crespo-1.webp", "/somos-crespo-2.webp", "/somos-crespo-3.webp", "/somos-crespo-4.webp"],
+		images: [
+			"/somos-crespo-1.webp",
+			"/somos-crespo-2.webp",
+			"/somos-crespo-3.webp",
+			"/somos-crespo-4.webp",
+		],
 	},
 	{
 		name: "ViajesDev",
@@ -21,11 +26,36 @@ const PROJECTS = [
 			"Proyecto final del tercer tramo del curso Desarrollador Web FullStack de Epica Educativa, se trata de una plataforma donde los usuarios pueden compartir fotos y experiencias de viajes",
 			"Permite ver las publicaciones de otras personas, y registrarse para poder crear publicaciones o comentar la de los demas.",
 		],
-		technologies: [TECHNOLOGIES.React, TECHNOLOGIES.Node, TECHNOLOGIES.Express, TECHNOLOGIES.MongoDB, TECHNOLOGIES.Tailwind, TECHNOLOGIES.Git],
+		technologies: [
+			TECHNOLOGIES.React,
+			TECHNOLOGIES.Node,
+			TECHNOLOGIES.Express,
+			TECHNOLOGIES.MongoDB,
+			TECHNOLOGIES.Tailwind,
+			TECHNOLOGIES.Git,
+		],
 		linkToCode: "https://github.com/nicolasrodriguez3/crespo-app",
 		video: null,
 		deployedSite: null,
-		images: ["/somos-crespo-1.webp", "/somos-crespo-2.webp", "/somos-crespo-3.webp"],
+		images: ["/somos-crespo-2.webp"],
+	},
+	{
+		name: "La Nerd Shop",
+		description: [
+			"Landing page bajo la temática geek y nerd, con un diseño moderno, colorido y divertido, que refleja la personalidad de la marca. El objetivo fue construir un sitio en React que pueda, en el futuro, evolucionar como e-commerce.",
+		],
+		technologies: [
+			TECHNOLOGIES.React,
+			TECHNOLOGIES.Node,
+			TECHNOLOGIES.Express,
+			TECHNOLOGIES.MongoDB,
+			TECHNOLOGIES.Tailwind,
+			TECHNOLOGIES.Git,
+		],
+		linkToCode: "https://github.com/nicolasrodriguez3/crespo-app",
+		video: null,
+		deployedSite: null,
+		images: ["/somos-crespo-3.webp"],
 	},
 ]
 ---
@@ -52,7 +82,7 @@ const PROJECTS = [
 						<h3 class="text-2xl font-bold">{project.name}</h3>
 					</header>
 					<div class="p-6">
-						<div class="text-white/80 flex flex-col gap-2">
+						<div class="dark:text-white/80 text-gray-900 flex flex-col gap-2">
 							{project.description.map((paragraph) => (
 								<p>{paragraph}</p>
 							))}

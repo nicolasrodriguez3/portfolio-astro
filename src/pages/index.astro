@@ -1,17 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import Section from "../components/Section.astro";
-import Services from "../components/Services.astro";
-import Pill from "../components/Pill.astro";
-import Projects from "../components/Projects.astro";
+import Section from "../components/Section.astro"
+import Services from "../components/Services.astro"
+import Pill from "../components/Pill.astro"
+import Projects from "../components/Projects.astro"
 import { TECHNOLOGIES } from "../constants/technologies"
 ---
 
 <Layout title="NicoDev | Desarrollador Web">
-	<main class="max-w-xl mx-auto px-4">
-		<Section title="" class="flex flex-col flex-wrap">
+	<main class="max-w-2xl mx-auto px-4">
+		<Section
+			title=""
+			class="flex flex-col flex-wrap">
 			<picture class="mb-4">
-				<img class="rounded-full bg-blue-300 size-20 object-cover" src="/img-perfil.png" alt="Foto de mi persona" />
+				<img
+					class="rounded-full bg-blue-300 size-20 object-cover"
+					src="/img-perfil.png"
+					alt="Foto de mi persona"
+				/>
 			</picture>
 			<div class="flex flex-col justify-center">
 				<p class="text-2xl md:text-4xl">¡Hola! 👋🏻</p>
@@ -23,16 +29,21 @@ import { TECHNOLOGIES } from "../constants/technologies"
 			<p>Creativo, innovador, resolutivo</p>
 		</Section>
 		<Services />
-		<section id="tecnologias" class="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-      <div class="container px-4 md:px-6">
-        <h2 class="text-3xl font-bold text-center mb-8">Tecnologias</h2>
-        <div class="flex flex-wrap justify-center gap-2">
-					{Object.values(TECHNOLOGIES).map(({name, className}) => <Pill class={className}>{name}</Pill>)}
-        </div>
-      </div>
-    </section>
-		
+		<section
+			id="tecnologias"
+			class="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+			<div class="container px-4 md:px-6">
+				<h2 class="text-3xl font-bold text-center mb-8">Tecnologias</h2>
+				<div class="flex flex-wrap justify-center gap-2">
+					{
+						Object.values(TECHNOLOGIES).map(({ name, className }) => (
+							<Pill class={className}>{name}</Pill>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
 		<Projects />
-		
 	</main>
 </Layout>
