@@ -4,10 +4,11 @@ import Section from "../components/Section.astro";
 import Services from "../components/Services.astro";
 import Pill from "../components/Pill.astro";
 import Projects from "../components/Projects.astro";
+import { TECHNOLOGIES } from "../constants/technologies"
 ---
 
 <Layout title="NicoDev | Desarrollador Web">
-	<main class="container mx-auto px-4">
+	<main class="max-w-xl mx-auto px-4">
 		<Section title="" class="flex flex-col flex-wrap">
 			<picture class="mb-4">
 				<img class="rounded-full bg-blue-300 size-20 object-cover" src="/img-perfil.png" alt="Foto de mi persona" />
@@ -26,14 +27,7 @@ import Projects from "../components/Projects.astro";
       <div class="container px-4 md:px-6">
         <h2 class="text-3xl font-bold text-center mb-8">Tecnologias</h2>
         <div class="flex flex-wrap justify-center gap-2">
-          <Pill class="bg-yellow-200 text-yellow-800">JavaScript</Pill>
-          <Pill class="bg-blue-200 text-blue-800">React</Pill>
-          <Pill class="bg-green-200 text-green-800">Node.js</Pill>
-          <Pill class="bg-purple-200 text-purple-800">Express</Pill>
-          <Pill class="bg-sky-200 text-sky-800">Tailwind CSS</Pill>
-          <Pill class="bg-emerald-200 text-emerald-800">MongoDB</Pill>
-          <Pill class="bg-orange-200 text-orange-800">Git</Pill>
-          <Pill class="bg-gray-200 text-gray-800">HTML &amp; CSS</Pill>
+					{Object.values(TECHNOLOGIES).map(({name, className}) => <Pill class={className}>{name}</Pill>)}
         </div>
       </div>
     </section>
