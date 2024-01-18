@@ -2,6 +2,7 @@
 import Section from "./Section.astro"
 import { TECHNOLOGIES } from "../constants/technologies"
 import Pill from "./Pill.astro"
+import Project from "./Project.astro"
 const PROJECTS = [
 	{
 		name: "Somos Crespo",
@@ -58,44 +59,18 @@ const PROJECTS = [
 		images: ["/somos-crespo-3.webp"],
 	},
 ]
+let slideToShow = 0
+
+const handlePrevious = () => slideToShow--
+const handleSubsequent = () => slideToShow++
+
 ---
 
 <Section title="Proyectos">
 	<div class="grid grid-cols-1 gap-8 py-8">
 		{
 			PROJECTS.map((project) => (
-				<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden group">
-					<img
-						src={project.images[0]}
-						alt={`Captura de pantalla de ${project.name}`}
-						class="w-full group-hover:scale-105 transition-transform duration-300"
-						width="300"
-						height="200"
-						style="aspect-ratio: 300 / 200; object-fit: cover;"
-					/>
-					<div class="flex flex-wrap items-start gap-2 p-6">
-						{project.technologies.map(({ name, className }) => (
-							<Pill class={className}>{name}</Pill>
-						))}
-					</div>
-					<header class="px-6">
-						<h3 class="text-2xl font-bold">{project.name}</h3>
-					</header>
-					<div class="p-6">
-						<div class="dark:text-white/80 text-gray-900 flex flex-col gap-2">
-							{project.description.map((paragraph) => (
-								<p>{paragraph}</p>
-							))}
-						</div>
-						<a
-							href={project.linkToCode}
-							target="_blank"
-							rel="noreferer noopener"
-							class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4 hover:bg-sky-200 dark:hover:bg-sky-800">
-							Ver código
-						</a>
-					</div>
-				</div>
+				<Project project={project}></Project>
 			))
 		}
 	</div>

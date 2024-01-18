@@ -1,0 +1,68 @@
+---
+import Pill from "./Pill.astro"
+
+const { project } = Astro.props
+---
+
+<astro-project>
+	<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden group">
+		<button class="prevBtn">&larr;</button><button class="subseqBtn">&rarr;</button>
+
+		<picture class="flex flex-row transition-transform   overflow-x-auto snap-mandatory snap-x">
+		{
+			project.images.map((img: string) => (
+				<img
+					src={img}
+					alt={`Captura de pantalla de ${project.name}`}
+					class="w-full group-hover:contrast-125 transition-all duration-300 snap-start grow-0 shrink-0 basis-[300px] object-cover"
+					width="300"
+					height="200"
+					style="aspect-ratio: 300 / 200;"
+				/>
+			))
+		}
+		</picture>
+
+		<div class="flex flex-wrap items-start gap-2 p-6">
+			{project.technologies.map(({ name, className }) => <Pill class={className}>{name}</Pill>)}
+		</div>
+		<header class="px-6">
+			<h3 class="text-2xl font-bold">{project.name}</h3>
+		</header>
+		<div class="p-6">
+			<div class="dark:text-white/80 text-gray-900 flex flex-col gap-2">
+				{project.description.map((paragraph) => <p>{paragraph}</p>)}
+			</div>
+			<a
+				href={project.linkToCode}
+				target="_blank"
+				rel="noreferer noopener"
+				class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4 hover:bg-sky-200 dark:hover:bg-sky-800"
+			>
+				Ver código
+			</a>
+		</div>
+	</div>
+</astro-project>
+
+<script>
+	class Project extends HTMLElement {
+		constructor() {
+			super()
+			let currentSlide = 0
+			const $prevBtn = this.querySelector(".prevBtn")
+			const $subseqBtn = this.querySelector(".subseqBtn")
+			const $pictureContainer = this.querySelector("picture")
+
+			$prevBtn.addEventListener("click", () => {
+				currentSlide--
+				$pictureContainer.style.transform = `translateX(${-300 * currentSlide }px)`
+			})
+			$subseqBtn.addEventListener("click", () => {
+				currentSlide++
+				$pictureContainer.style.transform = `translateX(${-300 * currentSlide }px)`
+			})
+		}
+	}
+	customElements.define("astro-project", Project)
+</script>
