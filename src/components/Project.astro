@@ -5,23 +5,67 @@ const { project } = Astro.props
 ---
 
 <astro-project>
-	<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden group">
-		<button class="prevBtn">&larr;</button><button class="subseqBtn">&rarr;</button>
-
-		<picture class="flex flex-row transition-transform   overflow-x-auto snap-mandatory snap-x">
-		{
-			project.images.map((img: string) => (
-				<img
-					src={img}
-					alt={`Captura de pantalla de ${project.name}`}
-					class="w-full group-hover:contrast-125 transition-all duration-300 snap-start grow-0 shrink-0 basis-[300px] object-cover"
-					width="300"
-					height="200"
-					style="aspect-ratio: 300 / 200;"
-				/>
-			))
-		}
-		</picture>
+	<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+		<section class="carousel-container relative">
+			<button
+				data-prev-btn
+				class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
+				<span
+					class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+					<svg
+						class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 6 10">
+						<path
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M5 1 1 5l4 4"
+						></path>
+					</svg>
+					<span class="sr-only">Anterior</span>
+				</span>
+			</button>
+			<button
+				data-next-btn
+				class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
+				<span
+					class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+					<svg
+						class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 6 10">
+						<path
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="m1 9 4-4-4-4"
+						></path>
+					</svg>
+					<span class="sr-only">Siguiente</span>
+				</span>
+			</button>
+			<div class="carousel flex flex-row transition-transform">
+				{
+					project.images.map((img: string) => (
+						<img
+							src={img}
+							alt={`Captura de pantalla de ${project.name}`}
+							class="w-full group-hover:contrast-125 transition-all duration-300 snap-start grow-0 shrink-0 basis-[300px] object-cover"
+							width="300"
+							height="200"
+							style="aspect-ratio: 300 / 200;"
+						/>
+					))
+				}
+			</div>
+		</section>
 
 		<div class="flex flex-wrap items-start gap-2 p-6">
 			{project.technologies.map(({ name, className }) => <Pill class={className}>{name}</Pill>)}
@@ -37,8 +81,7 @@ const { project } = Astro.props
 				href={project.linkToCode}
 				target="_blank"
 				rel="noreferer noopener"
-				class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4 hover:bg-sky-200 dark:hover:bg-sky-800"
-			>
+				class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4 hover:bg-sky-200 dark:hover:bg-sky-800">
 				Ver código
 			</a>
 		</div>
@@ -49,19 +92,35 @@ const { project } = Astro.props
 	class Project extends HTMLElement {
 		constructor() {
 			super()
-			let currentSlide = 0
-			const $prevBtn = this.querySelector(".prevBtn")
-			const $subseqBtn = this.querySelector(".subseqBtn")
-			const $pictureContainer = this.querySelector("picture")
+			const $carouselContainer = this.querySelector(".carousel")
+
+			// si hay una imagen
+			if ($carouselContainer.childElementCount <= 1) return
+
+			// si hay 2 o mas imagenes
+			const $prevBtn = this.querySelector("[data-prev-btn]")
+			const $nextBtn = this.querySelector("[data-next-btn]")
+
+			let currentIndex = 0
 
 			$prevBtn.addEventListener("click", () => {
-				currentSlide--
-				$pictureContainer.style.transform = `translateX(${-300 * currentSlide }px)`
+				if (currentIndex > 0) {
+					currentIndex--
+					updateSlider()
+				}
 			})
-			$subseqBtn.addEventListener("click", () => {
-				currentSlide++
-				$pictureContainer.style.transform = `translateX(${-300 * currentSlide }px)`
+
+			$nextBtn.addEventListener("click", () => {
+				if (currentIndex < $carouselContainer.children.length - 1) {
+					currentIndex++
+					updateSlider()
+				}
 			})
+
+			function updateSlider() {
+				const newPosition = -currentIndex * 100 + "%"
+				$carouselContainer.style.transform = `translateX(${newPosition})`
+			}
 		}
 	}
 	customElements.define("astro-project", Project)
