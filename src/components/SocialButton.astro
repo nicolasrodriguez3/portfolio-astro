@@ -1,11 +1,17 @@
 ---
+interface Props {
+	to?: string,
+	newPage?: boolean
+	children: any
+}
 
+const {to, newPage } = Astro.props
 ---
 
 <a
-	class="flex gap-2 items-center px-5 py-2 rounded-full border dark:border-white/20 border-gray-200 justify-center hover:bg-gray-200 dark:hover:bg-gray-200/20 transition-colors"
-	href={Astro.props.to ?? "#"}
-	target="_blank"
-	rel="noopener noreferrer">
+	class="flex gap-2 items-center px-5 py-2 rounded-full border dark:border-white/20 border-gray-200 justify-center hover:bg-gray-200 dark:hover:bg-gray-200/20 transition-colors group"
+	href={to ?? "#"}
+	target={newPage ? "_blank" : "_self"}
+	rel={newPage ? "noreferrer noopener" : ""}>
 	<slot />
 </a>
