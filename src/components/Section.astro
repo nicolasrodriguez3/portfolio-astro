@@ -1,13 +1,14 @@
 ---
 interface Props {
-	title: string
+	title?: string
 	class?: string
+	id?: string
 }
 
-const { title, class: className } = Astro.props
+const { title, class: className, id } = Astro.props
 ---
 
-<section class=`py-20 ${className}`>
+<section class:list={["py-20 px-3", className]} id={id}>
 	<h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">{title}</h2>
 	<slot />
 </section>

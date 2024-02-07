@@ -1,0 +1,15 @@
+---
+import { TECHNOLOGIES } from "../constants/technologies"
+import Pill from "./Pill.astro"
+import Section from "./Section.astro"
+---
+
+<Section title="Tecnologías" id="tecnologias" class="w-full py-12">
+		<div class="flex flex-wrap justify-center gap-2 mt-8">
+			{
+				Object.values(TECHNOLOGIES).map(({ name, className }) => (
+					<Pill class={className}>{name}</Pill>
+				))
+			}
+	</div>
+</Section>

@@ -50,9 +50,15 @@ const { title } = Astro.props
 		font-family: system-ui, sans-serif;
 		background: #ddd;
 		color-scheme: light dark;
+		scroll-behavior: smooth;
 	}
 	body{
 		width: 100%;
 	}
 
+	@media prefered-motion-reduce {
+		html{
+			scroll-behavior: auto;
+		}
+	}
 </style>

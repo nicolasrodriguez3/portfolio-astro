@@ -90,17 +90,17 @@ const { project } = Astro.props
 		<footer class="flex gap-2 items-start px-6 pb-6">
 			{
 				project.linkToCode && (
-					<SocialButton to="#">
+					<SocialButton to={project.linkToCode}>
 						<CodeIcon />
-						<span class="group-hover:ml-1 group-hover:pr-0 pr-1 transition-all">Ver código</span>
+						<span>Ver código</span>
 					</SocialButton>
 				)
 			}
 			{
 				project.deployedSite && (
-					<SocialButton>
+					<SocialButton to={project.deployedSite}>
 						<WebIcon />
-						<span class="group-hover:ml-1 group-hover:pr-0 pr-1 transition-all">Ver sitio</span>
+						<span>Ver sitio</span>
 					</SocialButton>
 				)
 			}
@@ -108,7 +108,7 @@ const { project } = Astro.props
 				project.video && (
 					<SocialButton>
 						<VideoIcon />
-						<span class="group-hover:ml-1 group-hover:pr-0 pr-1 transition-all">Video</span>
+						<span>Video</span>
 					</SocialButton>
 				)
 			}

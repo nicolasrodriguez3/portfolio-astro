@@ -17,25 +17,25 @@ export const PROJECTS = [
 			"/somos-crespo-4.webp",
 		],
 	},
-	{
-		name: "ViajesDev",
-		description: [
-			"Proyecto final del tercer tramo del curso Desarrollador Web FullStack de Epica Educativa, se trata de una plataforma donde los usuarios pueden compartir fotos y experiencias de viajes",
-			"Permite ver las publicaciones de otras personas, y registrarse para poder crear publicaciones o comentar la de los demas.",
-		],
-		technologies: [
-			TECHNOLOGIES.React,
-			TECHNOLOGIES.Node,
-			TECHNOLOGIES.Express,
-			TECHNOLOGIES.MongoDB,
-			TECHNOLOGIES.Tailwind,
-			TECHNOLOGIES.Git,
-		],
-		linkToCode: "https://github.com/nicolasrodriguez3/crespo-app",
-		video: null,
-		deployedSite: null,
-		images: ["/somos-crespo-2.webp"],
-	},
+	// {
+	// 	name: "ViajesDev",
+	// 	description: [
+	// 		"Proyecto final del tercer tramo del curso Desarrollador Web FullStack de Epica Educativa, se trata de una plataforma donde los usuarios pueden compartir fotos y experiencias de viajes",
+	// 		"Permite ver las publicaciones de otras personas, y registrarse para poder crear publicaciones o comentar la de los demas.",
+	// 	],
+	// 	technologies: [
+	// 		TECHNOLOGIES.React,
+	// 		TECHNOLOGIES.Node,
+	// 		TECHNOLOGIES.Express,
+	// 		TECHNOLOGIES.MongoDB,
+	// 		TECHNOLOGIES.Tailwind,
+	// 		TECHNOLOGIES.Git,
+	// 	],
+	// 	linkToCode: "https://github.com/nicolasrodriguez3/crespo-app",
+	// 	video: null,
+	// 	deployedSite: null,
+	// 	images: ["/somos-crespo-2.webp"],
+	// },
 	{
 		name: "La Nerd Shop",
 		description: [
@@ -46,9 +46,9 @@ export const PROJECTS = [
 			TECHNOLOGIES.React,
 			TECHNOLOGIES.Git,
 		],
-		linkToCode: "https://github.com/nicolasrodriguez3/crespo-app",
+		linkToCode: "https://github.com/nicolasrodriguez3/la-nerd-shop",
 		video: null,
-		deployedSite: true,
-		images: ["/somos-crespo-3.webp"],
+		deployedSite: "https://la-nerd-shop.vercel.app/",
+		images: ["/la-nerd-1.webp","/la-nerd-2.webp","/la-nerd-3.webp","/la-nerd-4.webp"],
 	},
 ]

@@ -1,8 +1,88 @@
 <header class="flex justify-between items-center container mx-auto py-6 px-4">
-	<a href="#" role="heading" aria-label="1">LOGO</a>
-	<nav class="flex gap-12">
-		<a href="#">Inicio</a>
-		<a href="#">Proyectos</a>
-		<a href="#">Contacto</a>
+	<a
+		class="hover:text-violet-500 focus-visible:outline outline-offset-8 outline-violet-500 outline-2 rounded"
+		href="#"
+		role="heading"
+		aria-label="1">Nicolás Rodríguez</a
+	>
+	<nav
+		class="hidden sm:flex gap-12 items-center justify-end"
+	>
+		<a
+			class="hover:text-violet-500 focus-visible:outline outline-offset-8 outline-violet-500 outline-2 rounded"
+			href="/#">Inicio</a
+		>
+		<a
+			class="hover:text-violet-500 focus-visible:outline outline-offset-8 outline-violet-500 outline-2 rounded"
+			href="/#proyectos">Proyectos</a
+		>
+		<a
+			class="hover:text-violet-500 focus-visible:outline outline-offset-8 outline-violet-500 outline-2 rounded"
+			href="/#contacto">Contacto</a
+		>
 	</nav>
+	<nav
+		class="menu flex sm:hidden fixed w-full h-screen top-0 left-0 flex-col items-center justify-center gap-8 z-50 bg-gray-50 dark:bg-gray-900 translate-x-full transition-all"
+	>
+		<a
+			class="hover:text-violet-500 focus-visible:outline outline-offset-8 outline-violet-500 outline-2 rounded"
+			href="/#">Inicio</a
+		>
+		<a
+			class="hover:text-violet-500 focus-visible:outline outline-offset-8 outline-violet-500 outline-2 rounded"
+			href="/#servicios">Servicios</a
+		>
+		<a
+			class="hover:text-violet-500 focus-visible:outline outline-offset-8 outline-violet-500 outline-2 rounded"
+			href="/#proyectos">Proyectos</a
+		>
+		<a
+			class="hover:text-violet-500 focus-visible:outline outline-offset-8 outline-violet-500 outline-2 rounded"
+			href="/#contacto">Contacto</a
+		>
+		<button class="close-menu sm:hidden absolute top-6 right-2 p-2 px-4">
+			<svg width="24" height="24" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="m13.5.5l-13 13m0-13l13 13"></path>
+			</svg>
+		</button>
+	</nav>
+	<button class="open-menu p-2 rounded active:scale-95 sm:hidden">
+		<svg
+			class="size-6"
+			width="48"
+			height="48"
+			viewBox="0 0 14 14"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path
+				fill="none"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M13.5 2H.5m13 5H.5m13 5H.5"></path>
+		</svg>
+	</button>
 </header>
+
+<script>
+	const nav = document.querySelector(".menu"),
+		openBtn = document.querySelector(".open-menu"),
+		closeBtn = document.querySelector(".close-menu")
+
+	openBtn.addEventListener("click", () => {
+		nav.classList.remove("translate-x-full")
+	})
+	closeBtn.addEventListener("click", () => {
+		nav.classList.add("translate-x-full")
+	})
+	nav.childNodes.forEach((el) => {
+		el.addEventListener("click", () => {
+			nav.classList.add("translate-x-full")
+		})
+	})
+</script>

@@ -1,50 +1,19 @@
 ---
 import Section from "./Section.astro"
-const SERVICES = [
-	{
-		name: "Diseño de Sitios Web a Medida",
-		description:
-			"Creo experiencias digitales únicas, adaptadas a las necesidades y visión de cada cliente. Desde la concepción inicial hasta la implementación, cada detalle cuenta.",
-	},
-	{
-		name: "Optimización y Rendimiento Web",
-		description:
-			"Garantizo que tus sitios no solo se vean geniales, sino que también funcionen de manera eficiente. Velocidad, rendimiento y calidad son mis prioridades.",
-	},
-	{
-		name: "Mantenimiento y Actualizaciones Periódicas",
-		description:
-			"La web evoluciona, y tus proyectos también. Ofrezco servicios de mantenimiento continuo para mantener tus sitios actualizados y seguros.",
-	},
-	{
-		name: "Integración de Tecnologías Modernas",
-		description:
-			"Trabajo con las últimas tecnologías (React, Astro, Tailwind, etc.) para asegurar que tu web esté a la vanguardia en cuanto a funcionalidad y diseño.",
-	},
-	{
-		name: "Responsive Design",
-		description:
-			"Tus usuarios están en todas partes. Me aseguro de que tu sitio se vea y funcione de manera impecable en cualquier dispositivo.",
-	},
-	{
-		name: "Colaboración Estrecha con el Cliente",
-		description:
-			"Tu visión es clave. Trabajemos juntos desde la idea inicial hasta el producto final, asegurando tu plena satisfacción en cada etapa.",
-	},
-]
+import { SERVICES } from "../constants/services";
 ---
 
-<Section title="Mis servicios">
-	<ol class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8">
+<Section title="Mis servicios" id="servicios">
+	<ul class="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-8 py-8">
 		{
 			SERVICES.map((service) => (
-				<li class="rounded-lg border border-sky-900 dark:border-sky-100 shadow-sm transform transition-transform duration-200 motion-safe:hover:scale-105">
-					<h3 class="text-2xl font-semibold leading-none tracking-tight text-balance space-y-1.5 p-6 text-sky-900 dark:text-sky-200">
+				<li class="rounded-lg border border-sky-900 dark:border-sky-100 shadow-sm transform transition-transform duration-200 motion-safe:md:hover:scale-105">
+					<h3 class="text-2xl font-semibold leading-none tracking-tight text-balance space-y-1.5 p-6 pb-2 text-violet-800 dark:text-violet-300">
 						{service.name}
 					</h3>
-					<p class="text-pretty p-6 text-gray-600 dark:text-gray-300">{service.description}</p>
+					<p class="text-pretty p-6 text-gray-600 dark:text-gray-50/90">{service.description}</p>
 				</li>
 			))
 		}
-	</ol>
+	</ul>
 </Section>

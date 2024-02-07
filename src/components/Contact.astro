@@ -1,8 +1,10 @@
-<section class="py-40 flex flex-col items-center gap-2">
-	<a
-		href="#"
-		class="text-5xl font-bold"
-		>Contáctame</a
-	>
-	<p class="text-xl">¡Hagamos realidad tu proyecto!</p>
+---
+import SocialButton from "./SocialButton.astro"
+import EmailIcon from "./icons/EmailIcon.astro"
+---
+
+<section class="py-40 flex flex-col items-center gap-2" id="contacto">
+	<h4 class="text-5xl font-bold">Contáctame</h4>
+	<p class="text-xl mb-2 opacity-80">¡Hagamos realidad tu proyecto!</p>
+	<SocialButton to="mailto:nicolasrodriguez@outlook.com.ar"><EmailIcon /> nicolasrodriguez@outlook.com.ar</SocialButton>
 </section>
