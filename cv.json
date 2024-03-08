@@ -154,46 +154,15 @@
   }],
   "projects": [
     {
-      "name": "mars.codes",
-      "isActive": true,
-      "description": "Historia interactiva con retos de programación para viajar a Marte",
+      "name": "Somos Crespo",
+      "isActive": false,
+      "description": "Desarrollada para el concurso Desarrollo de App creado por la Municipalidad de Crespo; es una herramienta que facilita la interacción entre los crespenses y el gobierno local. \nPermite a los vecinos enviar sus solicitudes, sugerencias o quejas de manera rápida y sin complicaciones, y al personal municipal puede acceder a cada publicación y darle seguimiento hasta su resolución. \nAdemás, es posible consultar el estado de los reclamos, acceder a información útil sobre servicios municipales y estar al tanto de las acciones y proyectos que lleva a cabo la Municipalidad.",
       "highlights": [
-        "Elige tu propia aventura",
-        "En desarrollo"
+        "3er lugar del concurso",
+        "Consumo de APIs"
       ],
-      "url": "https://mars.codes"
-    },
-    {
-      "name": "AdventJS",
-      "isActive": true,
-      "description": "Retos de programación en JavaScript para cada día de diciembre hasta Navidad",
-      "highlights": [
-        "+1 millón de visitas",
-        "Multidioma",
-        "JavaScript & TypeScript"
-      ],
-      "url": "https://adventjs.dev"
-    },
-    {
-      "name": "Codember",
-      "isActive": true,
-      "description": "Juego interactivo de programación con retos y secretos",
-      "highlights": [
-        "+2000 usuarios activos",
-        "Retos para cualquier lenguaje"
-      ],
-      "url": "https://codember.dev"
-    },
-    {
-      "name": "codi.link",
-      "isActive": true,
-      "description": "Playground de código HTML, CSS y JavaScript para compartir",
-      "highlights": [
-        "100k visitas al mes",
-        "Desarrollado por la comunidad"
-      ],
-      "url": "https://codi.link",
-      "github": "https://github.com/midudev/codi.link"
+      "url": null,
+      "github": "https://github.com/nicolasrodriguez3/crespo-app"
     },
     {
       "name": "Pruebas Técnicas",
@@ -205,15 +174,6 @@
       ],
       "url": "https://pruebastecnicas.com",
       "github": "https://github.com/midudev/pruebas-tecnicas"
-    },
-    {
-      "name": "miduConf",
-      "description": "Conferencia de programación en streaming para la comunidad hispanohablante con charlas top",
-      "highlights": [
-        "+15k tickets repartidos",
-        "+50k espectadores en directo"
-      ],
-      "url": "https://miduconf.com"
     }
   ]
 }

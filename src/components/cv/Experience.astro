@@ -4,11 +4,12 @@ import Section from "../Section.astro"
 import { work } from "@cv"
 ---
 
-<Section title="Experiencia laboral">
+<section>
+  <h2 class="text-2xl font-semibold mb-2 font-mono">Experiencia laboral</h2>
   <ul>
     {
       work.map(
-        ({ name, startDate, endDate, position, summary, highlights, url }) => {
+        ({ name, startDate, endDate, position, summary, url }) => {
           const startYear = new Date(startDate).getFullYear()
           const endYear =
             endDate != null ? new Date(endDate).getFullYear() : "Actual"
@@ -40,7 +41,7 @@ import { work } from "@cv"
       )
     }
   </ul>
-</Section>
+</section>
 
 <style>
   ul {
