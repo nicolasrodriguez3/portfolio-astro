@@ -1,45 +1,47 @@
 ---
-import Section from "./Section.astro";
-import SocialButton from "./SocialButton.astro";
-import EmailIcon from "./icons/EmailIcon.astro";
-import GithubIcon from "./icons/GithubIcon.astro";
-import LinkedinIcon from "./icons/LinkedinIcon.astro";
+import Section from "./Section.astro"
+import SocialButton from "./SocialButton.astro"
+import EmailIcon from "./icons/EmailIcon.astro"
+import GithubIcon from "./icons/GithubIcon.astro"
+import LinkedinIcon from "./icons/LinkedinIcon.astro"
 
-import { CONTACT } from "../constants/contact";
+import { CONTACT } from "../constants/contact"
 ---
 
-<Section
-			class="flex flex-col flex-wrap px-3">
-			<picture class="mb-4">
-				<img
-					class="rounded-full bg-blue-300 size-20 object-cover"
-					src="/img-perfil.png"
-					alt="Foto de mi persona"
-				/>
-			</picture>
-			<div class="flex flex-col justify-center mb-8">
-				<p class="text-3xl md:text-4xl mb-4">¡Hola! 👋🏻</p>
-				<h1 class="text-4xl md:text-5xl self-start font-semibold bg-gradient-to-br from-purple-600 to-blue-500 inline-block text-transparent bg-clip-text py-1">Soy Nicolás Rodríguez</h1>
-				<h3 class="text-xl md:text-3xl">Frontend Developer</h3>
-			</div>
-			<ul class="flex gap-2 flex-wrap">
-					<li>
-						<SocialButton to={CONTACT.Linkedin} newPage={true}>
-							<LinkedinIcon class="size-6" />
-							<span class="">LinkedIn</span>
-						</SocialButton>
-					</li>
-				<li>
-					<SocialButton to={CONTACT.Github} newPage={true}>
-						<GithubIcon class="size-6" />
-						GitHub
-					</SocialButton>
-				</li>
-				<li>
-					<SocialButton to="mailto:nicolasrodriguez@outlook.com.ar">
-						<EmailIcon class="size-6" />
-						nicolasrodriguez@outlook.com.ar
-					</SocialButton>
-				</li>
-			</ul>
-		</Section>
+<Section class="flex flex-col flex-wrap px-3">
+  <picture class="mb-4">
+    <img
+      class="rounded-full bg-blue-300 size-20 object-cover"
+      src="/img-perfil.png"
+      alt="Foto de mi persona"
+    />
+  </picture>
+  <div class="flex flex-col justify-center mb-8">
+    <p class="text-3xl md:text-4xl mb-4">¡Hola! 👋🏻</p>
+    <h1
+      class="text-4xl md:text-5xl self-start font-semibold bg-gradient-to-br from-purple-600 to-blue-500 inline-block text-transparent bg-clip-text py-1">
+      Soy Nicolás Rodríguez
+    </h1>
+    <h3 class="text-xl md:text-3xl">Frontend Developer</h3>
+  </div>
+  <ul class="flex gap-2 flex-wrap">
+    <li>
+      <SocialButton to={CONTACT.Linkedin} newPage={true}>
+        <LinkedinIcon class="size-6" />
+        <span class="">LinkedIn</span>
+      </SocialButton>
+    </li>
+    <li>
+      <SocialButton to={CONTACT.Github} newPage={true}>
+        <GithubIcon class="size-6" />
+        GitHub
+      </SocialButton>
+    </li>
+    <li>
+      <SocialButton to="mailto:nicolasrodriguez@outlook.com.ar">
+        <EmailIcon class="size-6" />
+        nicolasrodriguez@outlook.com.ar
+      </SocialButton>
+    </li>
+  </ul>
+</Section>
