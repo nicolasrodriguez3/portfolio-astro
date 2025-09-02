@@ -1,33 +1,51 @@
 ---
 interface Props {
 	to?: string,
-	newPage?: boolean
+	newPage?: boolean,
+	inProgress?: boolean,
 	children: any
 }
 
-const {to, newPage } = Astro.props
+const { to, newPage = false, inProgress = false } = Astro.props
+
+// Estilos
+const baseClass = `
+  relative inline-flex items-center justify-center p-0.5 
+  overflow-hidden text-sm font-medium text-gray-900 rounded-full group 
+  bg-gradient-to-br from-purple-600 to-blue-500 
+  group-hover:from-purple-600 group-hover:to-blue-500 
+  hover:text-white dark:text-white focus:ring-4 focus:outline-none 
+  focus:ring-blue-300 dark:focus:ring-blue-800
+  ${inProgress ? "cursor-not-allowed" : ""}
+`
+
+const innerClass = `
+  flex gap-2 items-center relative px-5 py-2.5 transition-all ease-in duration-75 
+  bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0
+`
+
+const Tag = inProgress ? "span" : "a"
 ---
 
-<a href={to ?? "#"}
-target={newPage ? "_blank" : "_self"}
-rel={newPage ? "noreferrer noopener" : ""}
-class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-	<span class="flex gap-2 items-center relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0">
-		<slot />
-	</span>
-</a>
-{
-	/*
-<a href={to ?? "#"}
-target={newPage ? "_blank" : "_self"}
-rel={newPage ? "noreferrer noopener" : ""} class="group inline-flex">
-	<span class="relative overflow-hidden rounded-full p-[2px]">
-		<span
-		class="absolute aspect-square -inset-full rounded-full [animation-play-state:paused] group-hover:[animation-play-state:running] animate-[spin_2s_linear_infinite] bg-gradient-to-br  from-blue-500 via-purple-600 to-white"></span>
-	<span class="inline-flex gap-2 items-center justify-center w-full px-5 py-2.5 text-sm rounded-full cursor-pointer dark:bg-gray-900 dark:text-white/80 backdrop-blur-3xl whitespace-nowrap">
-		<slot />
-	</span>
-	</span>
-</a>
-	*/
-}
+<span class="relative">
+  {inProgress && (
+    <span 
+      class="absolute top-0 left-1/2 px-2 py-1 text-xs font-bold leading-none text-red-100 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full z-10"
+    >
+      Próximamente
+    </span>
+  )}
+
+  <Tag
+    href={!inProgress ? to ?? "#" : undefined}
+    target={newPage ? "_blank" : undefined}
+    rel={newPage ? "noreferrer noopener" : undefined}
+    aria-disabled={inProgress ? "true" : "false"}
+    tabindex={inProgress ? -1 : undefined}
+    class={baseClass}
+  >
+    <span class={innerClass}>
+      <slot />
+    </span>
+  </Tag>
+</span>

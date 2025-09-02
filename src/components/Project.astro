@@ -6,154 +6,152 @@ import WebIcon from "./icons/WebIcon.astro"
 import VideoIcon from "./icons/VideoIcon.astro"
 
 const { project } = Astro.props
+const { name, description, technologies, linkToCode, deployedSite, video, images } = project
 ---
 
 <astro-project>
-	<div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
-		<section class="carousel-container relative">
-			<button
-				data-prev-btn
-				class="absolute top-0 start-0 z-30 items-center justify-center h-full px-4 cursor-pointer group focus:outline-none flex transition-opacity opacity-0 duration-200"
-			>
-				<span
-					class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-200/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
-				>
-					<svg
-						class="w-4 h-4 text-white dark:text-gray-200 rtl:rotate-180"
-						aria-hidden="true"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 6 10"
-					>
-						<path
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M5 1 1 5l4 4"></path>
-					</svg>
-					<span class="sr-only">Anterior</span>
-				</span>
-			</button>
-			{
-				project.images.length > 1 && (
-					<button
-						data-next-btn
-						class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none transition-opacity duration-200">
-						<span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-200/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-							<svg
-								class="w-4 h-4 text-white dark:text-gray-200 rtl:rotate-180"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 6 10">
-								<path
-									stroke="currentColor"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="m1 9 4-4-4-4"
-								/>
-							</svg>
-							<span class="sr-only">Siguiente</span>
-						</span>
-					</button>
-				)
-			}
-			<div class="carousel flex flex-row transition-transform">
-				{
-					project.images.map((img: string) => (
-						<img
-							src={img}
-							alt={`Captura de pantalla de ${project.name}`}
-							class="w-full grow-0 shrink-0 object-cover"
-							width="300"
-							height="200"
-							style="aspect-ratio: 300 / 200;"
-						/>
-					))
-				}
-			</div>
-		</section>
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+    <section class="carousel-container relative">
+      <button
+        data-prev-btn
+        class="absolute top-0 start-0 z-30 items-center justify-center h-full px-4 cursor-pointer group focus:outline-none flex transition-opacity opacity-0 duration-200">
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-200/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-200 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10">
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 1 1 5l4 4"></path>
+          </svg>
+          <span class="sr-only">Anterior</span>
+        </span>
+      </button>
+      {
+        images.length > 1 && (
+          <button
+            data-next-btn
+            class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none transition-opacity duration-200">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-200/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg
+                class="w-4 h-4 text-white dark:text-gray-200 rtl:rotate-180"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10">
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 9 4-4-4-4"
+                />
+              </svg>
+              <span class="sr-only">Siguiente</span>
+            </span>
+          </button>
+        )
+      }
+      <div class="carousel flex flex-row transition-transform">
+        {
+          images.map((img: string) => (
+            <img
+              src={img}
+              alt={`Captura de pantalla de ${name}`}
+              class="w-full grow-0 shrink-0 object-cover"
+              width="300"
+              height="200"
+              style="aspect-ratio: 300 / 200;"
+            />
+          ))
+        }
+      </div>
+    </section>
 
-		<div class="flex flex-wrap items-start gap-2 p-6">
-			{project.technologies.map(({ name, className }) => <Pill class={className}>{name}</Pill>)}
-		</div>
-		<header class="px-6">
-			<h3 class="text-2xl font-bold">{project.name}</h3>
-		</header>
-		<div class="p-6">
-			<div class="dark:text-white/80 text-gray-900 flex flex-col gap-2">
-				{project.description.map((paragraph: string) => <p>{paragraph}</p>)}
-			</div>
-		</div>
-		<footer class="flex gap-2 items-start px-6 pb-6">
-			{
-				project.linkToCode && (
-					<SocialButton to={project.linkToCode}>
-						<CodeIcon />
-						<span>Ver código</span>
-					</SocialButton>
-				)
-			}
-			{
-				project.deployedSite && (
-					<SocialButton to={project.deployedSite}>
-						<WebIcon />
-						<span>Ver sitio</span>
-					</SocialButton>
-				)
-			}
-			{
-				project.video && (
-					<SocialButton>
-						<VideoIcon />
-						<span>Video</span>
-					</SocialButton>
-				)
-			}
-		</footer>
-	</div>
+    <div class="flex flex-wrap items-start gap-2 p-6">
+      {technologies.map(({ name, className }) => <Pill class={className}>{name}</Pill>)}
+    </div>
+    <header class="px-6">
+      <h3 class="text-2xl font-bold">{name}</h3>
+    </header>
+    <div class="p-6">
+      <div class="dark:text-white/80 text-gray-900 flex flex-col gap-2">
+        {description.map((paragraph: string) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+    <footer class="flex gap-2 items-start px-6 pb-6">
+      {
+        linkToCode && (
+          <SocialButton to={linkToCode} inProgress={linkToCode === "#"}>
+            <CodeIcon />
+            <span>Ver código</span>
+          </SocialButton>
+        )
+      }
+      {
+        deployedSite && (
+          <SocialButton to={deployedSite} inProgress={deployedSite === "#"}>
+            <WebIcon />
+            <span>Ver sitio</span>
+          </SocialButton>
+        )
+      }
+      {
+        video && (
+          <SocialButton inProgress={video === "#"}>
+            <VideoIcon />
+            <span>Video</span>
+          </SocialButton>
+        )
+      }
+    </footer>
+  </div>
 </astro-project>
 
 <script>
-	class Project extends HTMLElement {
-		constructor() {
-			super()
-			const $carouselContainer = this.querySelector(".carousel") as HTMLElement
-			const numberOfSlides = $carouselContainer.childElementCount
+  class Project extends HTMLElement {
+    constructor() {
+      super()
+      const $carouselContainer = this.querySelector(".carousel") as HTMLElement
+      const numberOfSlides = $carouselContainer.childElementCount
 
-			// si hay una imagen
-			if (numberOfSlides <= 1) return
+      // si hay una imagen
+      if (numberOfSlides <= 1) return
 
-			// si hay 2 o mas imagenes
-			const $prevBtn = this.querySelector("[data-prev-btn]") as HTMLElement
-			const $nextBtn = this.querySelector("[data-next-btn]") as HTMLElement
+      // si hay 2 o mas imagenes
+      const $prevBtn = this.querySelector("[data-prev-btn]") as HTMLElement
+      const $nextBtn = this.querySelector("[data-next-btn]") as HTMLElement
 
-			let currentIndex = 0
+      let currentIndex = 0
 
-			$prevBtn.addEventListener("click", () => {
-				if (currentIndex > 0) {
-					currentIndex--
-					updateSlider()
-				}
-			})
+      $prevBtn.addEventListener("click", () => {
+        if (currentIndex > 0) {
+          currentIndex--
+          updateSlider()
+        }
+      })
 
-			$nextBtn.addEventListener("click", () => {
-				if (currentIndex < $carouselContainer.children.length - 1) {
-					currentIndex++
-					updateSlider()
-				}
-			})
+      $nextBtn.addEventListener("click", () => {
+        if (currentIndex < $carouselContainer.children.length - 1) {
+          currentIndex++
+          updateSlider()
+        }
+      })
 
-			function updateSlider() {
-				const newPosition = -currentIndex * 100 + "%"
-				$carouselContainer.style.transform = `translateX(${newPosition})`
+      function updateSlider() {
+        const newPosition = -currentIndex * 100 + "%"
+        $carouselContainer.style.transform = `translateX(${newPosition})`
 
-				$prevBtn.style.opacity = currentIndex > 0 ? "1" : "0"
-				$nextBtn.style.opacity = currentIndex === numberOfSlides - 1 ? "0" : "1"
-			}
-		}
-	}
-	customElements.define("astro-project", Project)
+        $prevBtn.style.opacity = currentIndex > 0 ? "1" : "0"
+        $nextBtn.style.opacity = currentIndex === numberOfSlides - 1 ? "0" : "1"
+      }
+    }
+  }
+  customElements.define("astro-project", Project)
 </script>

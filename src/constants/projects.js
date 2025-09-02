@@ -23,7 +23,7 @@ export const PROJECTS = [
 		technologies: [TECHNOLOGIES.React, TECHNOLOGIES.Tailwind, TECHNOLOGIES.Git],
 		linkToCode: "https://github.com/nicolasrodriguez3/crespo-app",
 		video: null,
-		deployedSite: null,
+		deployedSite: "#",
 		images: [
 			"/somos-crespo-1.webp",
 			"/somos-crespo-2.webp",
