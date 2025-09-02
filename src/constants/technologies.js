@@ -8,4 +8,6 @@ export const TECHNOLOGIES = {
 	Tailwind: { name: "Tailwind CSS", className: "bg-sky-200 text-sky-800" },
 	Astro: { name: "Astro", className: "bg-purple-200 text-purple-800" },
 	HTML: { name: "HTML & CSS", className: "bg-gray-200 text-gray-800" },
+	PHP: { name: "PHP", className: "bg-indigo-200 text-indigo-800" },
+	MySQL: { name: "MySQL", className: "bg-teal-200 text-teal-800" },
 }

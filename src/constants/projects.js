@@ -1,6 +1,20 @@
 import { TECHNOLOGIES } from './technologies'
 export const PROJECTS = [
 	{
+		name: "Cianbox ERP",
+		description: [
+			"Participé en el desarrollo y mantenimiento de Cianbox ERP, un sistema enfocado en emprendedores y empresas para gestionar su negocio.",
+			"Mis principales tareas fueron implementar mejoras solicitadas por los usuarios, realizar cambios en la generación de informes en PDF y Excel y desarrollar informes personalizados.",
+		],
+		technologies: [TECHNOLOGIES.JS, TECHNOLOGIES.PHP, TECHNOLOGIES.MySQL, TECHNOLOGIES.Git, TECHNOLOGIES.HTML],
+		linkToCode: null,
+		video: null,
+		deployedSite: null,
+		images: [
+			"/cianbox.webp",
+		],
+	},
+	{
 		name: "Somos Crespo",
 		description: [
 			"Desarrollada para el concurso Desarrollo de App creado por la Municipalidad de Crespo; es una herramienta innovadora que facilita la interacción entre los crespenses y el gobierno local.",

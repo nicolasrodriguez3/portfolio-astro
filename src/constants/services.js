@@ -1,4 +1,3 @@
-import ComputerStarIcon from "../components/icons/ComputerStarIcon.astro";
 
 export const SERVICES = [
 	{
