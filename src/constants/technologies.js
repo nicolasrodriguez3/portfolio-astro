@@ -1,5 +1,6 @@
 export const TECHNOLOGIES = {
 	JS: { name: "JavaScript", className: "bg-yellow-200 text-yellow-800" },
+	TypeScript: { name: "TypeScript", className: "bg-blue-300 text-blue-900" },
 	React: { name: "React", className: "bg-blue-200 text-blue-800" },
 	Node: { name: "Node.js", className: "bg-green-200 text-green-800" },
 	Express: { name: "Express", className: "bg-violet-200 text-violet-800" },
@@ -10,4 +11,6 @@ export const TECHNOLOGIES = {
 	HTML: { name: "HTML & CSS", className: "bg-gray-200 text-gray-800" },
 	PHP: { name: "PHP", className: "bg-indigo-200 text-indigo-800" },
 	MySQL: { name: "MySQL", className: "bg-teal-200 text-teal-800" },
+	Python: { name: "Python", className: "bg-yellow-300 text-yellow-900" },
+	FastAPI: { name: "FastAPI", className: "bg-emerald-300 text-emerald-900" },
 }
