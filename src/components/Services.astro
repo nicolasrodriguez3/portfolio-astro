@@ -1,19 +1,47 @@
 ---
 import Section from "./Section.astro"
-import { SERVICES } from "../constants/services";
+import { SERVICES } from "../constants/services"
 ---
 
 <Section title="Mis servicios" id="servicios">
-	<ul class="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-8 py-8">
-		{
-			SERVICES.map((service) => (
-				<li class="rounded-lg border border-sky-900 dark:border-sky-100 shadow-sm transform transition-transform duration-200 motion-safe:md:hover:scale-105">
-					<h3 class="text-2xl font-semibold leading-none tracking-tight text-balance space-y-1.5 p-6 pb-2 text-violet-800 dark:text-violet-300">
-						{service.name}
-					</h3>
-					<p class="text-pretty p-6 text-gray-600 dark:text-gray-50/90">{service.description}</p>
-				</li>
-			))
-		}
-	</ul>
+  <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-8 py-8">
+    {
+      SERVICES.map((service) => (
+        <li class={`service-card rounded-lg border border-sky-900 dark:border-sky-100 shadow-sm`}>
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-balance space-y-1.5 p-6 pb-2 text-violet-800 dark:text-violet-300">
+            {service.name}
+          </h3>
+          <p class="text-pretty p-6 text-gray-600 dark:text-gray-50/90">{service.description}</p>
+        </li>
+      ))
+    }
+  </ul>
 </Section>
+
+<style>
+  .service-card {
+    will-change: transform, opacity;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  gsap.utils.toArray(".service-card").forEach((card, index) => {
+    gsap.from(card as HTMLElement, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: index % 2 === 0 ? 0 : 0.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: card as HTMLElement,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    })
+  })
+</script>
