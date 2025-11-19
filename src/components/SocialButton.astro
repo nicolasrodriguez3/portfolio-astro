@@ -1,12 +1,12 @@
 ---
 interface Props {
-	to?: string,
-	newPage?: boolean,
-	inProgress?: boolean,
-	children: any
+  to?: string
+  newPage?: boolean
+  inProgress?: boolean
+  animate?: boolean
 }
 
-const { to, newPage = false, inProgress = false } = Astro.props
+const { to, newPage = false, inProgress = false, animate = false } = Astro.props
 
 // Estilos
 const baseClass = `
@@ -17,6 +17,7 @@ const baseClass = `
   hover:text-white dark:text-white focus:ring-4 focus:outline-none 
   focus:ring-blue-300 dark:focus:ring-blue-800
   ${inProgress ? "cursor-not-allowed" : ""}
+  ${animate ? "border-animation" : ""}
 `
 
 const innerClass = `
@@ -28,24 +29,62 @@ const Tag = inProgress ? "span" : "a"
 ---
 
 <span class="relative">
-  {inProgress && (
-    <span 
-      class="absolute top-0 left-1/2 px-2 py-1 text-xs font-bold leading-none text-red-100 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full z-10"
-    >
-      Próximamente
-    </span>
-  )}
+  {
+    inProgress && (
+      <span class="absolute top-0 left-1/2 px-2 py-1 text-xs font-bold leading-none text-red-100 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full z-10">
+        Próximamente
+      </span>
+    )
+  }
 
   <Tag
-    href={!inProgress ? to ?? "#" : undefined}
+    href={!inProgress ? (to ?? "#") : undefined}
     target={newPage ? "_blank" : undefined}
     rel={newPage ? "noreferrer noopener" : undefined}
     aria-disabled={inProgress ? "true" : "false"}
     tabindex={inProgress ? -1 : undefined}
-    class={baseClass}
-  >
+    class={baseClass}>
     <span class={innerClass}>
       <slot />
     </span>
   </Tag>
 </span>
+
+<style>
+   .border-animation::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    #8b5cf6,
+    #6366f1,
+    #3b82f6,
+    #06b6d4,
+    #8b5cf6
+  );
+  background-size: 400% 400%;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  animation: liquidGlow 3.5s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes liquidGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+  .border-animation span {
+    position: relative;
+    z-index: 1;
+  }
+</style>

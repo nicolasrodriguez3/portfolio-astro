@@ -4,7 +4,30 @@ import EmailIcon from "./icons/EmailIcon.astro"
 ---
 
 <section class="py-40 flex flex-col items-center gap-2" id="contacto">
-	<h4 class="text-5xl font-bold">Contáctame</h4>
-	<p class="text-xl mb-2 opacity-80">¡Hagamos realidad tu proyecto!</p>
-	<SocialButton to="mailto:nicolasrodriguez@outlook.com.ar"><EmailIcon /> nicolasrodriguez@outlook.com.ar</SocialButton>
+  <h4 class="text-5xl font-bold">Contáctame</h4>
+  <p class="text-xl mb-2 opacity-80">¡Hagamos realidad tu proyecto!</p>
+  <SocialButton to="mailto:nicolasrodriguez@outlook.com.ar" animate
+    ><EmailIcon /> nicolasrodriguez@outlook.com.ar</SocialButton
+  >
 </section>
+
+<script>
+  import { gsap } from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const tl = gsap.timeline()
+
+  gsap.from("#contacto > *", {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    stagger: 0.3,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "#contacto h4",
+      start: "top 80%",
+    },
+  })
+</script>
