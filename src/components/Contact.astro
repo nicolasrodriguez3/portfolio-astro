@@ -17,8 +17,6 @@ import EmailIcon from "./icons/EmailIcon.astro"
 
   gsap.registerPlugin(ScrollTrigger)
 
-  const tl = gsap.timeline()
-
   gsap.from("#contacto > *", {
     opacity: 0,
     y: 50,
@@ -28,6 +26,7 @@ import EmailIcon from "./icons/EmailIcon.astro"
     scrollTrigger: {
       trigger: "#contacto h4",
       start: "top 80%",
+      toggleActions: "play none none reverse",
     },
   })
 </script>

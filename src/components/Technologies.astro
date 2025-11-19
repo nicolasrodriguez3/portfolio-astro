@@ -4,7 +4,7 @@ import Pill from "./Pill.astro"
 import Section from "./Section.astro"
 ---
 
-<Section title="Tecnologías" id="tecnologias" class="w-full py-12">
+<Section title="Tecnologías" id="tecnologias" class="w-full pt-12 pb-20">
   <div class="flex flex-wrap justify-center gap-2 mt-8">
     {
       Object.values(TECHNOLOGIES).map(({ name, className }) => (
@@ -22,12 +22,13 @@ import Section from "./Section.astro"
 
   gsap.from("#tecnologias .pill", {
     opacity: 0,
-    duration: 0.75,
+    duration: 0.5,
     stagger: 0.1,
     ease: "back.out",
     scrollTrigger: {
       trigger: "#tecnologias .pill",
       start: "top 80%",
+      toggleActions: "play none none restart",
     },
   })
 </script>
