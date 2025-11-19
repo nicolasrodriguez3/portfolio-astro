@@ -9,7 +9,11 @@ const { title, class: className, id } = Astro.props
 ---
 
 <section class:list={["py-20 px-3", className]} id={id}>
-  <h2 class="section-title text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">{title}</h2>
+  <h2
+    data-title={title}
+    class="section-title text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+    {title}
+  </h2>
   <slot />
 </section>
 
@@ -20,23 +24,25 @@ const { title, class: className, id } = Astro.props
 
   gsap.registerPlugin(ScrollTrigger)
 
-  const text = new SplitType(".section-title", { types: "words,chars" })
+  const sectionTitleEl = document.querySelector(".section-title")
+  const shouldAnimate = !!sectionTitleEl?.getAttribute("data-title")
 
-  gsap.utils.toArray(".section-title").forEach((title: HTMLElement) => {
-    const text = new SplitType(title, { types: "words,chars" })
+  if (shouldAnimate) {
+    gsap.utils.toArray(".section-title").forEach((title: HTMLElement) => {
+      const text = new SplitType(title, { types: "words,chars" })
 
-    gsap.from(text.chars, {
-      opacity: 0,
-      x: 50,
-      duration: 0.5,
-      ease: "power2.out",
-      stagger: 0.1,
-      scrollTrigger: {
-        trigger: title,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
+      gsap.from(text.chars, {
+        opacity: 0,
+        x: 50,
+        duration: 0.5,
+        ease: "power2.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: title,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      })
     })
-  })
-  
+  }
 </script>
