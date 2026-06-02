@@ -13,4 +13,5 @@ export const TECHNOLOGIES = {
 	MySQL: { name: "MySQL", className: "bg-teal-200 text-teal-800" },
 	Python: { name: "Python", className: "bg-yellow-300 text-yellow-900" },
 	FastAPI: { name: "FastAPI", className: "bg-emerald-300 text-emerald-900" },
+	TinaCMS: { name: "TinaCMS", className: "bg-pink-200 text-pink-800" },
 }

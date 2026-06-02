@@ -1,6 +1,23 @@
 import { TECHNOLOGIES } from './technologies'
 export const PROJECTS = [
 	{
+		name: "Landing page - BEO",
+		description: [
+			"Diseño y desarrollo de landing page institucional para BEO, estudio de estrategia y marketing.","Construida con Astro y TailwindCSS v4, con contenido gestionable vía TinaCMS + TinaCloud. Incluye animaciones de scroll reveal, editor visual contextual y deploy estático automatizado.",
+		],
+		technologies: [TECHNOLOGIES.Astro, TECHNOLOGIES.Tailwind, TECHNOLOGIES.Git, TECHNOLOGIES.TinaCMS],
+		linkToCode: null,
+		video: null,
+		deployedSite: "https://beo.ar",
+		images: [
+			"/beo-landing1.webp",
+			"/beo-landing2.webp",
+			"/beo-landing3.webp",
+			"/beo-landing4.webp",
+			"/beo-landing5.webp",
+		],
+	},
+	{
 		name: "Cianbox ERP",
 		description: [
 			"Participé en el desarrollo y mantenimiento de Cianbox ERP, un sistema enfocado en emprendedores y empresas para gestionar su negocio.",

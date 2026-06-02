@@ -80,7 +80,7 @@ const { name, description, technologies, linkToCode, deployedSite, video, images
 </astro-project>
 <div class="card details rounded-xl bg-violet-50 dark:bg-gray-950 mt-2">
     <div class="flex flex-wrap items-start gap-2 p-6">
-    {technologies.map(({ name, className }) => <Pill class={className}>{name}</Pill>)}
+    {technologies.map(({ name, className }: { name: string; className: string }) => <Pill class={className}>{name}</Pill>)}
     </div>
     <header class="px-6">
     <h3 class="text-2xl font-bold">{name}</h3>
@@ -101,7 +101,7 @@ const { name, description, technologies, linkToCode, deployedSite, video, images
     }
     {
         deployedSite && (
-        <SocialButton to={deployedSite} inProgress={deployedSite === "#"}>
+        <SocialButton to={deployedSite} inProgress={deployedSite === "#"} newPage>
             <WebIcon />
             <span>Ver sitio</span>
         </SocialButton>

@@ -1,7 +1,6 @@
 ---
-import SpeedInsights from "@vercel/speed-insights/astro"
-import Analytics from '@vercel/analytics/astro'
 import Header from "../components/Header.astro"
+
 interface Props {
 	title: string
 }
@@ -13,12 +12,13 @@ const { title } = Astro.props
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Desarrollador web con dos años de experiencia, listo para trabajar en tu proyecto." />
+		<meta name="description" content="Desarrollador web con cuatro años de experiencia, listo para trabajar en tu proyecto." />
 		<meta name="og:title" content="Nicolás Rodríguez | Desarrollador Web"/>
 		<meta name="title" property="og:title" content="Nicolás Rodríguez | Desarrollador Web">
-		<meta name="description" property="og:description" content="Desarrollador web con dos años de experiencia, listo para trabajar en tu proyecto.">
+		<meta name="description" property="og:description" content="Desarrollador web con cuatro años de experiencia, listo para trabajar en tu proyecto.">
 		<meta name="keywords" content="desarrollador frontend, programador web, HTML, CSS, JavaScript, React, Vue.js, Angular, diseño web, experiencia de usuario, UI/UX, responsive design, desarrollo web, portafolio, proyectos, tecnología, informática, programador, páginas web, Nicolas Rodriguez, frontend, innovación, moderno, landing page, creadores de páginas web, página para mi emprendimiento, página para mi negocio">
 		<meta name="image" property="og:image" content="/screenshot.jpg">
+        <meta name="canonical" content="https://www.nicorodriguez.com.ar/" />
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="author" content="Nicolás Rodríguez">
@@ -34,9 +34,6 @@ const { title } = Astro.props
 
 		<title>{title}</title>
 
-		<!-- Analytics -->
-		<Analytics/>
-		<SpeedInsights/>
 	</head>
 	<body class="">
 		<div class="fixed top-0 -z-10 h-screen w-screen bg-white dark:bg-gray-950 bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_60%,rgba(0,163,255,0)_100%)]">
