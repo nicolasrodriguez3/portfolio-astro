@@ -1,12 +1,14 @@
 ---
 import Section from "./Section.astro"
-import { SERVICES } from "../constants/services"
+import { getServicios } from "../lib/content"
+
+const services = await getServicios()
 ---
 
 <Section title="Mis servicios" id="servicios">
   <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-8 py-8">
     {
-      SERVICES.map((service) => (
+      services.map((service) => (
         <li class={`service-card rounded-lg border border-sky-900 dark:border-sky-100 shadow-sm`}>
           <h3 class="text-2xl font-semibold leading-none tracking-tight text-balance space-y-1.5 p-6 pb-2 text-violet-800 dark:text-violet-300">
             {service.name}
@@ -40,7 +42,7 @@ import { SERVICES } from "../constants/services"
       scrollTrigger: {
         trigger: card as HTMLElement,
         start: "top 80%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play none none none",
       },
     })
   })
