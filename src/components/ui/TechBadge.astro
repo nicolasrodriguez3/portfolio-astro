@@ -1,0 +1,59 @@
+---
+import { technologies as defaultTechnologies } from '@/data/technologies'
+import type { TechCategory } from '@/types'
+
+export interface Props {
+  technology: string
+  technologies?: Record<string, { name: string; category: TechCategory }>
+  size?: 'sm' | 'md'
+  className?: string
+}
+
+const {
+  technology,
+  technologies = defaultTechnologies,
+  size = 'md',
+  className,
+} = Astro.props
+
+const tech = technologies[technology]
+
+const categoryColors: Record<string, string> = {
+  frontend: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
+  backend: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+  database: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+  tools: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
+}
+
+const unknownColors =
+  'bg-zinc-500/10 text-zinc-400 border-zinc-500/20'
+
+const displayName = tech?.name ?? technology
+const category = tech?.category
+const colorClass = category ? categoryColors[category] ?? unknownColors : unknownColors
+
+const sizeClasses = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm'
+
+const categoryLabel =
+  category === 'frontend'
+    ? 'Frontend'
+    : category === 'backend'
+      ? 'Backend'
+      : category === 'database'
+        ? 'Base de datos'
+        : category === 'tools'
+          ? 'Herramientas'
+          : category ?? 'Tecnología'
+---
+
+<span
+  class:list={[
+    'inline-flex items-center rounded-full border font-medium',
+    colorClass,
+    sizeClasses,
+    className,
+  ]}
+  aria-label={`${categoryLabel}: ${displayName}`}
+>
+  {displayName}
+</span>
