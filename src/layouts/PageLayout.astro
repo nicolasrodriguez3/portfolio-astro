@@ -1,5 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro'
+import Navbar from '@/components/shared/Navbar.astro'
+import Footer from '@/components/shared/Footer.astro'
 
 interface Props {
   mode: 'freelance' | 'recruiter'
@@ -15,15 +17,11 @@ const { mode, ...baseProps } = Astro.props
 ---
 
 <BaseLayout {...baseProps}>
-  <nav data-navbar class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <!-- Navbar será reemplazado en Etapa 3 -->
-  </nav>
+  <Navbar mode={mode} />
   <main>
     <slot />
   </main>
-  <footer>
-    <!-- Footer será reemplazado en Etapa 3 -->
-  </footer>
+  <Footer mode={mode} />
 </BaseLayout>
 
 <script>
