@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'InterVariable', 'Inter', system-ui, sans-serif;
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-zinc-950 text-zinc-100 antialiased;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    @apply bg-indigo-500/30 text-zinc-100;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-zinc-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-800 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-700;
+  }
+}
+
+@layer components {
+  .container-default {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-narrow {
+    @apply max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .heading-gradient {
+    @apply bg-gradient-to-br from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .section-first {
+    @apply pt-24 md:pt-32;
+  }
+
+  .section-last {
+    @apply pb-16 md:pb-24;
+  }
+}
+
+@layer utilities {
+  .bg-hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cpath d='M60 2 L118 30 L118 74 L60 102 L2 74 L2 30 Z' fill='none' stroke='%2327272a' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E");
+    background-size: 120px 104px;
+  }
+
+  .bg-hex-hero {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cpath d='M60 2 L118 30 L118 74 L60 102 L2 74 L2 30 Z' fill='none' stroke='%2327272a' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E"),
+      radial-gradient(100% 50% at 50% 0%, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.04) 50%, transparent 100%);
+    background-size: 120px 104px, 100% 100%;
+  }
+
+  .bg-hex-section {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cpath d='M60 2 L118 30 L118 74 L60 102 L2 74 L2 30 Z' fill='none' stroke='%2327272a' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E"),
+      radial-gradient(100% 50% at 50% 100%, rgba(99, 102, 241, 0.06) 0%, transparent 80%);
+    background-size: 120px 104px, 100% 100%;
+  }
+
+  .bg-hex-decorative {
+    width: 200px;
+    height: 174px;
+    background: rgba(99, 102, 241, 0.08);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    filter: blur(60px);
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+/* Transiciones globales */
+* {
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Excluir elementos animados por GSAP */
+.no-transition {
+  transition: none !important;
+}
