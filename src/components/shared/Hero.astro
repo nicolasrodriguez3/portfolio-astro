@@ -1,0 +1,136 @@
+---
+import type { HeroProps } from '@/types'
+
+export interface Props extends HeroProps {}
+
+const {
+  headline,
+  subtitle,
+  subtitleSize = 'lg',
+  buttons,
+  align = 'center',
+  media,
+  gradient = true,
+  className,
+} = Astro.props
+
+const buttonClasses: Record<string, string> = {
+  primary:
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none no-underline px-7 py-3.5 text-base bg-gradient-to-br from-indigo-500 to-violet-600 text-white border-none hover:brightness-110 hover:shadow-lg hover:shadow-indigo-500/20 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950',
+  secondary:
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none no-underline px-7 py-3.5 text-base bg-zinc-800 text-zinc-100 border border-zinc-700 hover:bg-zinc-700 hover:border-zinc-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950',
+  ghost:
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none no-underline px-7 py-3.5 text-base text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950',
+}
+---
+
+<section
+  data-hero
+  class="relative min-h-[85vh] flex items-center section-first overflow-hidden {className}"
+>
+  {gradient && (
+    <div class="absolute inset-0 bg-hex-hero pointer-events-none" />
+  )}
+
+  <!-- Decorative hexagons (≥768px) -->
+  {gradient && (
+    <div
+      class="hidden md:block bg-hex-decorative"
+      style="top: 10%; right: -5%;"
+    ></div>
+  )}
+  {gradient && (
+    <div
+      class="hidden md:block bg-hex-decorative"
+      style="bottom: 5%; left: -8%;"
+    ></div>
+  )}
+
+  <div
+    class={`relative z-10 w-full ${
+      align === 'center' ? 'max-w-3xl' : 'max-w-6xl'
+    } mx-auto px-4 sm:px-6 lg:px-8`}
+  >
+    <div
+      class={`flex flex-col ${
+        align === 'center'
+          ? 'items-center text-center'
+          : 'items-start text-left'
+      } gap-6`}
+    >
+      <!-- Media (profile pic, etc.) -->
+      {media && <div data-hero-media class="mb-2">{media}</div>}
+
+      <!-- Headline -->
+      <h1
+        data-hero-headline
+        class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight heading-gradient"
+      >
+        {headline}
+      </h1>
+
+      <!-- Subtitle -->
+      {subtitle && (
+        <p
+          data-hero-subtitle
+          class={`text-zinc-400 max-w-2xl ${
+            subtitleSize === 'lg' ? 'text-lg md:text-xl' : 'text-base md:text-lg'
+          }`}
+        >
+          {subtitle}
+        </p>
+      )}
+
+      <!-- Buttons -->
+      {buttons.length > 0 && (
+        <div
+          data-hero-buttons
+          class={`flex flex-wrap gap-4 pt-2 ${
+            align === 'center' ? 'justify-center' : 'justify-start'
+          }`}
+        >
+          {buttons.map((btn) => (
+            <a
+              href={btn.href}
+              target={btn.external ? '_blank' : undefined}
+              rel={btn.external ? 'noopener noreferrer' : undefined}
+              download={btn.download || undefined}
+              class={buttonClasses[btn.variant] || buttonClasses.primary}
+            >
+              {btn.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from '@/lib/animations'
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const hero = document.querySelector('[data-hero]')
+    if (hero) {
+      const headline = hero.querySelector('[data-hero-headline]')
+      const subtitle = hero.querySelector('[data-hero-subtitle]')
+      const buttons = hero.querySelector('[data-hero-buttons]')
+      const media = hero.querySelector('[data-hero-media]')
+
+      const tl = gsap.timeline({
+        defaults: { ease: 'power2.out', duration: 0.6 },
+      })
+
+      if (media) tl.from(media, { opacity: 0, y: 20 }, 0)
+      if (headline) tl.from(headline, { opacity: 0, y: 30 }, 0.1)
+      if (subtitle) tl.from(subtitle, { opacity: 0, y: 20 }, 0.2)
+      if (buttons) {
+        tl.from(
+          buttons.children,
+          { opacity: 0, y: 20, stagger: 0.1 },
+          0.3,
+        )
+      }
+    }
+  }
+</script>
