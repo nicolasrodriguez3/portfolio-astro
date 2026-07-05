@@ -1,0 +1,24 @@
+---
+import { faq } from '@/data/faq'
+import Container from '@/components/ui/Container.astro'
+import SectionTitle from '@/components/ui/SectionTitle.astro'
+import AnimatedSection from '@/components/ui/AnimatedSection'
+import FAQ from '@/components/shared/FAQ'
+
+const hasFaq = faq.length > 0
+---
+
+{hasFaq && (
+  <section id="faq" class="section-padding">
+    <Container size="narrow">
+      <SectionTitle
+        title="Preguntas Frecuentes"
+        subtitle="Respondo las dudas más comunes sobre mis servicios de desarrollo web"
+      />
+
+      <AnimatedSection animation="fade" className="mt-10">
+        <FAQ items={faq} />
+      </AnimatedSection>
+    </Container>
+  </section>
+)}
