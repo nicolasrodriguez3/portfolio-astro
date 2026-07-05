@@ -1,21 +1,83 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import Services from "../components/Services.astro"
-import Projects from "../components/Projects.astro"
-import Contact from "../components/Contact.astro"
-import Footer from "../components/Footer.astro"
-import Hero from "../components/Hero.astro"
-import Technologies from "../components/Technologies.astro"
+import PageLayout from '@/layouts/PageLayout.astro'
+import { profile } from '@/data/profile'
 
+import Hero from '@/components/shared/Hero.astro'
+import CTA from '@/components/shared/CTA.astro'
+
+import ServicesSection from '@/components/freelance/ServicesSection.astro'
+import ProcessSection from '@/components/freelance/ProcessSection.astro'
+import SuccessCases from '@/components/freelance/SuccessCases.astro'
+import FAQSection from '@/components/freelance/FAQSection.astro'
+
+const { freelance, phone, email, social, name } = profile
+
+const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(freelance.whatsappMessage)}`
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Nicolás Rodríguez — Desarrollo Web',
+  description: freelance.headline,
+  url: 'https://www.nicorodriguez.com.ar',
+  telephone: `+${phone}`,
+  email,
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'AR',
+  },
+  sameAs: [social.linkedin, social.github],
+}
 ---
 
-<Layout title="NicoDev | Desarrollador Web">
-	<main class="max-w-2xl mx-auto pt-20">
-		<Hero />
-		<Services />
-		<Projects />
-		<Technologies />
-		<Contact />
-	</main>
-	<Footer />
-</Layout>
+<PageLayout
+  mode="freelance"
+  title="Nicolás Rodríguez | Desarrollo Web Freelance — Sitios modernos y optimizados"
+  description={freelance.headline}
+  canonical="https://www.nicorodriguez.com.ar"
+  ogType="website"
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <Hero
+    headline={freelance.headline}
+    subtitle={freelance.subtitle}
+    buttons={[
+      { label: 'Solicitar presupuesto', href: whatsappUrl, variant: 'primary' },
+    ]}
+    align="center"
+    gradient={true}
+    media={
+      <img
+        src="/img-perfil.png"
+        alt={name}
+        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover ring-4 ring-indigo-500/20 shadow-lg"
+        loading="eager"
+        width="160"
+        height="160"
+      />
+    }
+  />
+
+  <!-- Services -->
+  <ServicesSection />
+
+  <!-- Process -->
+  <ProcessSection />
+
+  <!-- Success Cases -->
+  <SuccessCases />
+
+  <!-- FAQ -->
+  <FAQSection />
+
+  <!-- Final CTA -->
+  <CTA
+    headline="¿Tenés un proyecto en mente?"
+    description="Sin compromiso — te respondo en menos de 24 horas"
+    buttons={[
+      { label: 'Solicitar presupuesto', href: whatsappUrl, variant: 'primary' },
+    ]}
+    variant="default"
+  />
+</PageLayout>
