@@ -26,7 +26,7 @@ const buttonClasses: Record<string, string> = {
 
 <section
   data-hero
-  class="relative min-h-[85vh] flex items-center section-first overflow-hidden {className}"
+  class:list={['relative min-h-[85vh] flex items-center section-first overflow-hidden', className]}
 >
   {gradient && (
     <div class="absolute inset-0 bg-hex-hero pointer-events-none" />
