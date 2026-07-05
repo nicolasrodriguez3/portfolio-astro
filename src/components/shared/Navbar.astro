@@ -1,0 +1,218 @@
+---
+import type { NavbarLink } from '@/types'
+
+export interface Props {
+  mode: 'freelance' | 'recruiter'
+  className?: string
+}
+
+const { mode, className } = Astro.props
+
+const freelanceLinks: NavbarLink[] = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Servicios', href: '/#servicios' },
+  { label: 'Casos de Éxito', href: '/#casos' },
+  { label: 'FAQ', href: '/#faq' },
+]
+
+const recruiterLinks: NavbarLink[] = [
+  { label: 'Sobre mí', href: '/#about' },
+  { label: 'Stack', href: '/#stack' },
+  { label: 'Experiencia', href: '/#experience' },
+  { label: 'Proyectos', href: '/#projects' },
+]
+
+const links = mode === 'freelance' ? freelanceLinks : recruiterLinks
+---
+
+<nav
+  data-navbar
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 {className}"
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a
+        href="/"
+        class="text-xl font-semibold text-zinc-100 hover:text-zinc-100 transition-colors no-underline"
+      >
+        NR
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-1">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="px-3 py-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50 rounded-lg transition-all duration-200 no-underline"
+          >
+            {link.label}
+          </a>
+        ))}
+        {
+          mode === 'freelance' && (
+            <a
+              href="/hire-me"
+              class="ml-2 px-4 py-2 text-sm font-medium text-indigo-400 hover:text-indigo-300 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 rounded-lg transition-all duration-200 no-underline"
+            >
+              ¿Buscás un desarrollador? &rarr;
+            </a>
+          )
+        }
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button
+        id="menu-toggle"
+        class="md:hidden relative z-50 p-2 text-zinc-400 hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg"
+        aria-label="Abrir menú"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Menú</span>
+        <div class="w-6 h-5 flex flex-col justify-between" aria-hidden="true">
+          <span
+            class="block w-6 h-0.5 bg-current rounded origin-center transition-all duration-300"
+          ></span>
+          <span
+            class="block w-6 h-0.5 bg-current rounded transition-all duration-300"
+          ></span>
+          <span
+            class="block w-6 h-0.5 bg-current rounded origin-center transition-all duration-300"
+          ></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-zinc-950/95 backdrop-blur-xl translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Navegación"
+  >
+    <!-- Backdrop click area -->
+    <div data-menu-backdrop class="absolute inset-0"></div>
+
+    <!-- Content -->
+    <div
+      class="relative flex flex-col items-center justify-center h-full gap-8 px-6"
+    >
+      {links.map((link) => (
+        <a
+          href={link.href}
+          data-menu-link
+          class="text-2xl font-medium text-zinc-400 hover:text-zinc-100 transition-colors duration-200 no-underline"
+        >
+          {link.label}
+        </a>
+      ))}
+      {
+        mode === 'freelance' && (
+          <a
+            href="/hire-me"
+            data-menu-link
+            class="mt-4 px-6 py-3 text-lg font-medium text-indigo-400 hover:text-indigo-300 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 rounded-xl transition-all duration-200 no-underline"
+          >
+            ¿Buscás un desarrollador? &rarr;
+          </a>
+        )
+      }
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* Hamburger → X animation */
+  #menu-toggle.open > div > span:nth-child(1) {
+    transform: rotate(45deg) translate(3.5px, 3.5px);
+  }
+  #menu-toggle.open > div > span:nth-child(2) {
+    opacity: 0;
+  }
+  #menu-toggle.open > div > span:nth-child(3) {
+    transform: rotate(-45deg) translate(3.5px, -3.5px);
+  }
+
+  /* Scrolled navbar state (toggled by PageLayout ScrollTrigger) */
+  nav[data-navbar].navbar-scrolled {
+    background-color: rgba(9, 9, 11, 0.8);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(113, 113, 122, 0.5);
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.3),
+      0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')
+  const menu = document.getElementById('mobile-menu')
+  if (!toggle || !menu) throw new Error('Navbar: missing mobile menu elements')
+
+  let isOpen = false
+
+  function toggleMenu() {
+    isOpen = !isOpen
+    menu.classList.toggle('translate-x-full', !isOpen)
+    menu.classList.toggle('translate-x-0', isOpen)
+    toggle.classList.toggle('open', isOpen)
+    toggle.setAttribute('aria-expanded', String(isOpen))
+    toggle.setAttribute(
+      'aria-label',
+      isOpen ? 'Cerrar menú' : 'Abrir menú',
+    )
+
+    // Body scroll lock
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+
+    if (isOpen) {
+      const firstLink = menu.querySelector('[data-menu-link]')
+      if (firstLink instanceof HTMLElement) firstLink.focus()
+    }
+  }
+
+  toggle.addEventListener('click', toggleMenu)
+
+  // Click on menu backdrop or link → close
+  menu.addEventListener('click', (e) => {
+    const target = e.target
+
+    // Backdrop click (directly on the overlay background)
+    if (target instanceof HTMLElement && target.closest('[data-menu-backdrop]')) {
+      if (isOpen) toggleMenu()
+      return
+    }
+
+    // Link click
+    if (target instanceof HTMLElement && target.closest('[data-menu-link]')) {
+      toggleMenu()
+    }
+  })
+
+  // Escape key → close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) toggleMenu()
+  })
+
+  // Focus trap inside mobile menu
+  menu.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab' || !isOpen) return
+    const focusable = menu.querySelectorAll(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    )
+    if (focusable.length === 0) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault()
+      first.focus()
+    }
+  })
+</script>
