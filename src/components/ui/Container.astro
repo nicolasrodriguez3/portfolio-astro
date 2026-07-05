@@ -1,0 +1,17 @@
+---
+export interface Props {
+  size?: 'default' | 'narrow'
+  className?: string
+  as?: 'div' | 'section' | 'article'
+  id?: string
+}
+
+const { size = 'default', className, as: Tag = 'div', id } = Astro.props
+
+const containerClass =
+  size === 'narrow' ? 'container-narrow' : 'container-default'
+---
+
+<Tag class:list={[containerClass, className]} {id}>
+  <slot />
+</Tag>
