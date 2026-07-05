@@ -1,16 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import Section from "../components/Section.astro"
 import Services from "../components/Services.astro"
 import Projects from "../components/Projects.astro"
 import Contact from "../components/Contact.astro"
 import Footer from "../components/Footer.astro"
 import Hero from "../components/Hero.astro"
 import Technologies from "../components/Technologies.astro"
-import { getHero } from "../lib/content"
 
-const hero = await getHero()
-const bioParagraphs = hero?.bio?.split('\n\n').slice(1).filter(Boolean) || []
 ---
 
 <Layout title="NicoDev | Desarrollador Web">
@@ -19,12 +15,6 @@ const bioParagraphs = hero?.bio?.split('\n\n').slice(1).filter(Boolean) || []
 		<Services />
 		<Projects />
 		<Technologies />
-
-		<Section title="Sobre mí" id="about">
-			<main class="py-8 flex flex-col gap-4">
-				{bioParagraphs.map((paragraph) => <p>{paragraph}</p>)}
-			</main>
-		</Section>
 		<Contact />
 	</main>
 	<Footer />
