@@ -1,0 +1,41 @@
+---
+import Container from '@/components/ui/Container.astro'
+import SectionTitle from '@/components/ui/SectionTitle.astro'
+import AnimatedSection from '@/components/ui/AnimatedSection'
+import type { Profile } from '@/types'
+
+export interface Props {
+  profile: Profile
+}
+
+const { profile: p } = Astro.props
+---
+
+<section id="about" class="section-padding">
+  <Container>
+    <AnimatedSection animation="fade" client:visible>
+      <div class="text-center">
+        <SectionTitle title="Sobre mí" align="center" />
+      </div>
+
+      <div
+        class="prose prose-invert max-w-3xl mx-auto mt-8 text-zinc-300 leading-relaxed space-y-4 text-center"
+      >
+        <p class="text-lg">
+          {p.recruiter.valueProp}
+        </p>
+        <p>
+          Con experiencia construyendo sistemas ERP modulares, landing pages de alto
+          rendimiento y aplicaciones web modernas. Me apasiona diseñar arquitecturas
+          limpias, escribir código mantenible y resolver problemas complejos del mundo
+          real.
+        </p>
+        <p>
+          Actualmente me especializo en desarrollo web con Astro, React y TypeScript,
+          combinando rendimiento con excelente experiencia de desarrollo. Busco mi próximo
+          desafío donde pueda aportar visión técnica y experiencia práctica.
+        </p>
+      </div>
+    </AnimatedSection>
+  </Container>
+</section>

@@ -1,0 +1,138 @@
+---
+import Container from '@/components/ui/Container.astro'
+import SectionTitle from '@/components/ui/SectionTitle.astro'
+import TechBadge from '@/components/ui/TechBadge.astro'
+import AnimatedSection from '@/components/ui/AnimatedSection'
+import { formatDateRange } from '@/lib/utils'
+import type { Experience } from '@/types'
+
+export interface Props {
+  experiences: Experience[]
+}
+
+const { experiences } = Astro.props
+
+// Sort: current (endDate === null) first, then by startDate descending
+const sorted = [...experiences].sort((a, b) => {
+  if (a.endDate === null && b.endDate !== null) return -1
+  if (a.endDate !== null && b.endDate === null) return 1
+  return b.startDate.localeCompare(a.startDate)
+})
+---
+
+<section id="experience" class="section-padding">
+  <Container>
+    <AnimatedSection animation="fade" client:visible>
+      <div class="text-center">
+        <SectionTitle
+          title="Experiencia"
+          subtitle="Mi recorrido profesional hasta hoy"
+        />
+      </div>
+    </AnimatedSection>
+
+    <div class="relative mt-12">
+      <!-- Vertical line -->
+      <div
+        class="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-zinc-800"
+        aria-hidden="true"
+      ></div>
+
+      <div class="space-y-12">
+        {
+          sorted.map((exp) => (
+            <div class="relative pl-12 md:pl-16">
+              <!-- Dot -->
+              <div
+                class="absolute top-1.5 w-3 h-3 rounded-full border-2"
+                style="left: 13px;"
+                class:list={[
+                  'border-2',
+                  exp.endDate === null
+                    ? 'bg-indigo-500 border-indigo-400 shadow-lg shadow-indigo-500/20'
+                    : 'bg-zinc-900 border-zinc-700',
+                ]}
+                aria-hidden="true"
+              ></div>
+
+              <!-- Card -->
+              <div
+                class="bg-zinc-900 border border-zinc-800 rounded-xl p-6"
+              >
+                <span class="text-sm text-zinc-500"
+                  >{formatDateRange(exp.startDate, exp.endDate)}</span
+                >
+                <h3 class="text-xl font-semibold text-zinc-100 mt-1">
+                  {exp.role}
+                </h3>
+                <p class="text-zinc-400">{exp.company}</p>
+
+                <!-- Responsibilities -->
+                {
+                  exp.responsibilities && exp.responsibilities.length > 0 && (
+                    <div class="mt-4">
+                      <h4 class="text-sm font-medium text-zinc-500 mb-2">
+                        Responsabilidades
+                      </h4>
+                      <ul class="space-y-1.5">
+                        {
+                          exp.responsibilities.map((r: string) => (
+                            <li class="text-sm text-zinc-400 flex gap-2">
+                              <span
+                                class="text-zinc-600 mt-0.5 select-none"
+                              >•</span>
+                              <span>{r}</span>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </div>
+                  )
+                }
+
+                <!-- Achievements -->
+                {
+                  exp.achievements && exp.achievements.length > 0 && (
+                    <div class="mt-4">
+                      <h4 class="text-sm font-medium text-zinc-500 mb-2">
+                        Logros
+                      </h4>
+                      <ul class="space-y-1.5">
+                        {
+                          exp.achievements.map((a: string) => (
+                            <li class="text-sm text-zinc-400 flex gap-2">
+                              <span
+                                class="text-indigo-400 mt-0.5 select-none"
+                              >✦</span>
+                              <span>{a}</span>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </div>
+                  )
+                }
+
+                <!-- Technologies -->
+                {
+                  exp.technologies && exp.technologies.length > 0 && (
+                    <div class="flex flex-wrap gap-2 pt-3">
+                      {
+                        exp.technologies.map((tech: string) => (
+                          <TechBadge
+                            technology={tech.toLowerCase()}
+                            size="sm"
+                          />
+                        ))
+                      }
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>

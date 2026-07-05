@@ -1,0 +1,75 @@
+---
+import Container from '@/components/ui/Container.astro'
+import SectionTitle from '@/components/ui/SectionTitle.astro'
+import TechBadge from '@/components/ui/TechBadge.astro'
+import AnimatedSection from '@/components/ui/AnimatedSection'
+import type { Technology } from '@/types'
+
+export interface Props {
+  technologies: Record<string, Technology>
+}
+
+const { technologies } = Astro.props
+
+interface CategoryDef {
+  key: string
+  label: string
+}
+
+const categories: CategoryDef[] = [
+  { key: 'frontend', label: 'Frontend' },
+  { key: 'backend', label: 'Backend' },
+  { key: 'database', label: 'Bases de datos' },
+  { key: 'tools', label: 'Herramientas' },
+]
+
+// Group technologies by category
+const grouped = new Map<string, [string, Technology][]>()
+for (const [key, tech] of Object.entries(technologies)) {
+  const cat = tech.category
+  if (!grouped.has(cat)) grouped.set(cat, [])
+  grouped.get(cat)!.push([key, tech])
+}
+
+const visibleCategories = categories.filter((cat) => {
+  const items = grouped.get(cat.key)
+  return items && items.length > 0
+})
+---
+
+<section id="stack" class="section-padding">
+  <Container>
+    <AnimatedSection animation="fade" client:visible>
+      <div class="text-center">
+        <SectionTitle
+          title="Stack Tecnológico"
+          subtitle="Tecnologías con las que trabajo día a día"
+        />
+      </div>
+    </AnimatedSection>
+
+    <div class="mt-12 space-y-10">
+      {
+        visibleCategories.map(({ key, label }) => {
+          const items = grouped.get(key)!
+          return (
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold text-zinc-200">{label}</h3>
+              <AnimatedSection
+                stagger={0.05}
+                className="flex flex-wrap gap-2"
+                client:visible
+              >
+                {
+                  items.map(([techKey]) => (
+                    <TechBadge technology={techKey} size="sm" />
+                  ))
+                }
+              </AnimatedSection>
+            </div>
+          )
+        })
+      }
+    </div>
+  </Container>
+</section>

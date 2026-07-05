@@ -1,0 +1,64 @@
+---
+import Container from '@/components/ui/Container.astro'
+import SectionTitle from '@/components/ui/SectionTitle.astro'
+import ProjectCard from '@/components/shared/ProjectCard.astro'
+import AnimatedSection from '@/components/ui/AnimatedSection'
+import type { Project } from '@/types'
+
+export interface Props {
+  projects: Project[]
+}
+
+const { projects } = Astro.props
+
+// Filter destacados, sort by orden ascending
+const featured = projects
+  .filter((p) => p.destacado === true)
+  .sort((a, b) => a.orden - b.orden)
+---
+
+<section id="projects" class="section-padding">
+  <Container>
+    <AnimatedSection animation="fade" client:visible>
+      <div class="text-center">
+        <SectionTitle
+          title="Proyectos Destacados"
+          subtitle="Algunos de los proyectos en los que he trabajado"
+        />
+      </div>
+    </AnimatedSection>
+
+    {
+      featured.length > 0 && (
+        <AnimatedSection
+          stagger={0.15}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12"
+          client:visible
+        >
+          {
+            featured.map((p) => (
+              <ProjectCard
+                title={p.title}
+                description={p.description}
+                image={p.image}
+                technologies={p.technologies}
+                linkToCode={p.linkToCode}
+                deployedSite={p.deployedSite}
+                casoExito={p.casoExito}
+                slug={p.slug}
+              />
+            ))
+          }
+        </AnimatedSection>
+      )
+    }
+
+    {
+      featured.length === 0 && (
+        <p class="text-center text-zinc-500 mt-12">
+          No hay proyectos destacados para mostrar.
+        </p>
+      )
+    }
+  </Container>
+</section>
