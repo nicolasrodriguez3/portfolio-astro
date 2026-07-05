@@ -1,14 +1,20 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import node from '@astrojs/node';
-import keystatic from '@keystatic/astro';
-
 import react from '@astrojs/react';
-import markdoc from '@astrojs/markdoc';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://www.nicorodriguez.com.ar',
   output: 'static',
-  adapter: node({ mode: 'standalone' }),
-  integrations: [tailwind(), keystatic(), react(), markdoc()],
+  integrations: [
+    tailwind(),
+    react(),
+    sitemap({
+      changefreq: 'monthly',
+      priority: 1.0,
+      lastmod: new Date(),
+      filter: (page) => page !== 'https://www.nicorodriguez.com.ar/404/',
+    }),
+  ],
 });
