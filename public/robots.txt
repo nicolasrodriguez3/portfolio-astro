@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.nicorodriguez.com.ar/sitemap-index.xml
