@@ -1,0 +1,130 @@
+---
+import Container from '@/components/ui/Container.astro'
+import SectionTitle from '@/components/ui/SectionTitle.astro'
+import AnimatedSection from '@/components/ui/AnimatedSection'
+
+interface ProcessStep {
+  number: number
+  title: string
+  description: string
+}
+
+const steps: ProcessStep[] = [
+  { number: 1, title: 'Reunión', description: 'Entendemos tu proyecto y objetivos en una primera charla sin compromiso' },
+  { number: 2, title: 'Propuesta', description: 'Te presento alcance detallado con presupuesto y cronograma estimado' },
+  { number: 3, title: 'Diseño', description: 'Maqueta interactiva y diseño de interfaz para tu aprobación' },
+  { number: 4, title: 'Desarrollo', description: 'Programación del sitio con revisiones periódicas y pruebas' },
+  { number: 5, title: 'Entrega', description: 'Deploy en producción, configuración de dominio y presentación final' },
+  { number: 6, title: 'Soporte', description: 'Mantenimiento, ajustes y soporte post-lanzamiento continuo' },
+]
+
+const midpoint = Math.ceil(steps.length / 2)
+const firstRow = steps.slice(0, midpoint)
+const secondRow = steps.slice(midpoint)
+---
+
+<section id="proceso" class="section-padding relative overflow-hidden">
+  <Container>
+    <SectionTitle
+      title="¿Cómo trabajo?"
+      subtitle="Un proceso transparente de principio a fin, desde la primera reunión hasta el soporte post-lanzamiento"
+    />
+
+    <!-- Mobile: vertical timeline -->
+    <div class="mt-12 md:hidden">
+      <AnimatedSection animation="slide-up" stagger={0.12}>
+        <div class="relative">
+          <!-- Vertical connecting line -->
+          <div
+            class="absolute left-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-indigo-500 via-violet-500 to-purple-500/40"
+            aria-hidden="true"
+          ></div>
+
+          {steps.map((step) => (
+            <div class="relative pl-12 pb-8 last:pb-0">
+              {/* Number circle */}
+              <div
+                class="absolute left-0 top-0 w-10 h-10 rounded-full bg-indigo-500/10 border-2 border-indigo-500/30 flex items-center justify-center text-sm font-bold text-indigo-400 z-10"
+                aria-hidden="true"
+              >
+                {step.number}
+              </div>
+
+              <h3 class="text-lg font-semibold text-zinc-100">{step.title}</h3>
+              <p class="text-sm text-zinc-400 mt-1 leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+    </div>
+
+    <!-- Desktop: 3×2 grid with connecting lines -->
+    <div class="mt-12 hidden md:block">
+      <AnimatedSection animation="slide-up" stagger={0.12}>
+        <div class="relative">
+          <!-- Row 1: steps 1-2-3 -->
+          <div class="grid grid-cols-3 gap-6 lg:gap-10">
+            {firstRow.map((step, i) => (
+              <div class="relative flex flex-col items-center text-center">
+                {/* Horizontal line between columns */}
+                {i < firstRow.length - 1 && (
+                  <div
+                    class="absolute top-5 left-[calc(50%+1.5rem)] right-[calc(-50%+2.5rem)] h-px bg-gradient-to-r from-indigo-500/40 to-violet-500/40 hidden lg:block"
+                    aria-hidden="true"
+                  ></div>
+                )}
+
+                {/* Number circle */}
+                <div class="w-10 h-10 rounded-full bg-indigo-500/10 border-2 border-indigo-500/30 flex items-center justify-center text-sm font-bold text-indigo-400">
+                  {step.number}
+                </div>
+
+                <h3 class="text-lg font-semibold text-zinc-100 mt-4">
+                  {step.title}
+                </h3>
+                <p class="text-sm text-zinc-400 mt-2 leading-relaxed max-w-xs">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <!-- Vertical line between rows -->
+          <div
+            class="mx-auto w-px h-6 bg-gradient-to-b from-violet-500/40 to-indigo-500/40"
+            aria-hidden="true"
+          ></div>
+
+          <!-- Row 2: steps 4-5-6 -->
+          <div class="grid grid-cols-3 gap-6 lg:gap-10 mt-6">
+            {secondRow.map((step, i) => (
+              <div class="relative flex flex-col items-center text-center">
+                {/* Horizontal line between columns */}
+                {i < secondRow.length - 1 && (
+                  <div
+                    class="absolute top-5 left-[calc(50%+1.5rem)] right-[calc(-50%+2.5rem)] h-px bg-gradient-to-r from-indigo-500/40 to-violet-500/40 hidden lg:block"
+                    aria-hidden="true"
+                  ></div>
+                )}
+
+                {/* Number circle */}
+                <div class="w-10 h-10 rounded-full bg-indigo-500/10 border-2 border-indigo-500/30 flex items-center justify-center text-sm font-bold text-indigo-400">
+                  {step.number}
+                </div>
+
+                <h3 class="text-lg font-semibold text-zinc-100 mt-4">
+                  {step.title}
+                </h3>
+                <p class="text-sm text-zinc-400 mt-2 leading-relaxed max-w-xs">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </AnimatedSection>
+    </div>
+  </Container>
+</section>
