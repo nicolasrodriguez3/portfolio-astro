@@ -1,0 +1,88 @@
+---
+import type { CTAProps } from '@/types'
+import Container from '@/components/ui/Container.astro'
+
+export interface Props extends CTAProps {}
+
+const {
+  headline,
+  description,
+  buttons,
+  variant = 'default',
+  className,
+} = Astro.props
+
+const buttonClasses: Record<string, string> = {
+  primary:
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none no-underline px-7 py-3.5 text-base bg-gradient-to-br from-indigo-500 to-violet-600 text-white border-none hover:brightness-110 hover:shadow-lg hover:shadow-indigo-500/20 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950',
+  secondary:
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none no-underline px-7 py-3.5 text-base bg-zinc-800 text-zinc-100 border border-zinc-700 hover:bg-zinc-700 hover:border-zinc-600 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950',
+}
+---
+
+<section
+  data-cta
+  class={`section-padding ${className ?? ''} ${
+    variant === 'card' ? '' : 'bg-hex-section'
+  }`}
+>
+  <Container size="narrow">
+    <div
+      class={`text-center ${
+        variant === 'card'
+          ? 'bg-zinc-900 border border-zinc-800 rounded-2xl p-8 md:p-12 shadow-lg'
+          : ''
+      }`}
+    >
+      <h2 class="text-3xl md:text-4xl font-bold heading-gradient">
+        {headline}
+      </h2>
+
+      {
+        description && (
+          <p class="mt-4 text-lg text-zinc-400 max-w-xl mx-auto">
+            {description}
+          </p>
+        )
+      }
+
+      <div
+        class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mt-8"
+      >
+        {buttons.map((btn) => (
+          <a
+            href={btn.href}
+            target={btn.external ? '_blank' : undefined}
+            rel={btn.external ? 'noopener noreferrer' : undefined}
+            download={btn.download || undefined}
+            class={buttonClasses[btn.variant] || buttonClasses.primary}
+          >
+            {btn.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  import { gsap, ScrollTrigger } from '@/lib/animations'
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const cta = document.querySelector('[data-cta]')
+    if (cta) {
+      gsap.from(cta.children, {
+        scrollTrigger: {
+          trigger: cta,
+          start: 'top 85%',
+          once: true,
+        },
+        opacity: 0,
+        y: 30,
+        stagger: 0.15,
+        duration: 0.6,
+        ease: 'power2.out',
+      })
+    }
+  }
+</script>
