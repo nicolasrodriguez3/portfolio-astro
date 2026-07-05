@@ -1,12 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import Section from "../components/Section.astro"
 import Services from "../components/Services.astro"
 import Projects from "../components/Projects.astro"
 import Contact from "../components/Contact.astro"
 import Footer from "../components/Footer.astro"
 import Hero from "../components/Hero.astro"
 import Technologies from "../components/Technologies.astro"
+
 ---
 
 <Layout title="NicoDev | Desarrollador Web">
@@ -15,15 +15,6 @@ import Technologies from "../components/Technologies.astro"
 		<Services />
 		<Projects />
 		<Technologies />
-
-		<Section title="Sobre mí" id="about">
-			<main class="py-8 flex flex-col gap-4">
-
-				<p>Programador web con {new Date().getFullYear() - 2022} años de experiencia en el desarrollo de sitios web dinámicos y responsivos.</p>
-				<p>Me apasiona crear <span class="dark:text-violet-400 text-violet-600">soluciones innovadoras y de calidad</span>, utilizando las mejores prácticas y herramientas del mercado.</p>
-				<p>¡Estoy listo para enfrentarme a nuevos desafíos!</p>
-			</main>
-			</Section>
 		<Contact />
 	</main>
 	<Footer />

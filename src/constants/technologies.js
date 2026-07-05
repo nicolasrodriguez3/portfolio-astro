@@ -1,17 +1,18 @@
-export const TECHNOLOGIES = {
-	JS: { name: "JavaScript", className: "bg-yellow-200 text-yellow-800" },
-	TypeScript: { name: "TypeScript", className: "bg-blue-300 text-blue-900" },
-	React: { name: "React", className: "bg-blue-200 text-blue-800" },
-	Node: { name: "Node.js", className: "bg-green-200 text-green-800" },
-	Express: { name: "Express", className: "bg-violet-200 text-violet-800" },
-	MongoDB: { name: "MongoDB", className: "bg-emerald-200 text-emerald-800" },
-	Git: { name: "Git", className: "bg-orange-200 text-orange-800" },
-	Tailwind: { name: "Tailwind CSS", className: "bg-sky-200 text-sky-800" },
-	Astro: { name: "Astro", className: "bg-purple-200 text-purple-800" },
-	HTML: { name: "HTML & CSS", className: "bg-gray-200 text-gray-800" },
-	PHP: { name: "PHP", className: "bg-indigo-200 text-indigo-800" },
-	MySQL: { name: "MySQL", className: "bg-teal-200 text-teal-800" },
-	Python: { name: "Python", className: "bg-yellow-300 text-yellow-900" },
-	FastAPI: { name: "FastAPI", className: "bg-emerald-300 text-emerald-900" },
-	TinaCMS: { name: "TinaCMS", className: "bg-pink-200 text-pink-800" },
+import { technologies } from '@/data/technologies'
+
+const COLOR_MAP = {
+  frontend: 'bg-sky-200 text-sky-800',
+  backend: 'bg-emerald-200 text-emerald-800',
+  database: 'bg-amber-200 text-amber-800',
+  tools: 'bg-zinc-200 text-zinc-800',
 }
+
+export const TECHNOLOGIES = Object.fromEntries(
+  Object.entries(technologies).map(([key, tech]) => [
+    key.charAt(0).toUpperCase() + key.slice(1),
+    {
+      name: tech.name,
+      className: COLOR_MAP[tech.category] || 'bg-zinc-200 text-zinc-800',
+    },
+  ]),
+)

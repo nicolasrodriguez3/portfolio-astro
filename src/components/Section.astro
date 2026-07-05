@@ -33,14 +33,14 @@ const { title, class: className, id } = Astro.props
 
       gsap.from(text.chars, {
         opacity: 0,
-        x: 50,
-        duration: 0.5,
+        x: 20,
+        duration: 0.3,
         ease: "power2.out",
-        stagger: 0.1,
+        stagger: 0.04,
         scrollTrigger: {
           trigger: title,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+          start: "top 85%",
+          toggleActions: "play none none none",
         },
       })
     })
