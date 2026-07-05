@@ -1,0 +1,41 @@
+---
+import BaseLayout from './BaseLayout.astro'
+
+interface Props {
+  mode: 'freelance' | 'recruiter'
+  title: string
+  description: string
+  ogImage?: string
+  ogType?: 'website' | 'profile'
+  canonical?: string
+  jsonLd?: Record<string, unknown>
+}
+
+const { mode, ...baseProps } = Astro.props
+---
+
+<BaseLayout {...baseProps}>
+  <nav data-navbar class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <!-- Navbar será reemplazado en Etapa 3 -->
+  </nav>
+  <main>
+    <slot />
+  </main>
+  <footer>
+    <!-- Footer será reemplazado en Etapa 3 -->
+  </footer>
+</BaseLayout>
+
+<script>
+  import { gsap, ScrollTrigger } from '@/lib/animations'
+
+  const navbar = document.querySelector('[data-navbar]')
+  if (navbar) {
+    ScrollTrigger.create({
+      start: 'top -50px',
+      onUpdate: (self) => {
+        navbar.classList.toggle('navbar-scrolled', self.progress > 0)
+      },
+    })
+  }
+</script>
